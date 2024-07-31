@@ -1,0 +1,106 @@
+
+<div class="">
+  <div class="table-container">
+  <table class="">
+
+    <thead>
+      <div class="dropdown">
+        <a class="dropdown-toggle" role="button" (click)="toggleDropdown()" aria-haspopup="true" aria-expanded="false">
+          <i class="fa-solid fa-eye"></i>
+        </a>
+        <div class="dropdown-menu" [class.show]="dropdownVisible" [class.hide]="!dropdownVisible" #selectDropdown>
+          <a class="dropdown-item" *ngFor="let column of columns; let colIndex = index">
+            <label>
+              <input type="checkbox" [(ngModel)]="column.visible" (change)="saveGridOptionToCache()">
+              {{ column.header }}
+            </label>
+            <select class="form-control" [(ngModel)]="column.searchOperation" (change)="saveGridOptionToCache()">
+              <ng-container >
+                <option *ngFor="let operation of comparisonOptions" [value]="operation.label">{{ operation.arabicLabel }}</option>
+              </ng-container>
+            </select>
+          </a>
+        </div>
+        <a role="button" (click)="clearFilter()" ><i class="fa-solid fa-rotate-right"></i></a>
+      </div>
+      <tr>
+        <th *ngFor="let column of columns; let colIndex = index"  [hidden]="!column.visible">
+          {{ column.header }}
+          <a (click)="onOrderClick(column.selectQueryName)" *ngIf= "column.isOrderByField && fieldOrder!==column.selectQueryName" ><i class="fa-solid fa-sort"></i></a>
+          <a (click)="onOrderClick(column.selectQueryName)" *ngIf= "column.isOrderByField && column.selectQueryName===fieldOrder && !orderASC"><i class="fa-solid fa-sort-up"></i></a>
+          <a (click)="onOrderClick(column.selectQueryName)" *ngIf= "column.isOrderByField && column.selectQueryName===fieldOrder && orderASC"><i class="fa-solid fa-sort-down"></i></a>
+          <input [placeholder]="getArabicName(column.searchOperation)" *ngIf="column.searchableField && column.type=='text'||column.type=='html'" type="text" class="form-control" id="searchInput" [(ngModel)]="column.searchValue" (change)="onSearch(column.field,column.selectQueryName,column.searchValue,column.searchOperation)">
+          <input [placeholder]="getArabicName(column.searchOperation)" *ngIf="column.searchableField && column.type=='number'" type="number" class="form-control" id="searchInput" [(ngModel)]="column.searchValue" (change)="onSearch(column.field,column.selectQueryName,column.searchValue,column.searchOperation)">
+          <input [placeholder]="getArabicName(column.searchOperation)" *ngIf="column.searchableField && column.type === 'date'"
+       type="date"
+       class="form-control"
+       id="searchInput"
+       placeholder="dd-MM-yyyy"
+       [(ngModel)]="column.searchValue"
+       (change)="onSearch(column.field,column.selectQueryName, column.searchValue,column.searchOperation)"
+       >
+       <select *ngIf="column.searchableField && column.type === 'list'" (change)="onSearch(column.field, column.selectQueryName, column.searchValue, column.searchOperation)" class="form-control" [(ngModel)]="column.searchValue">
+        <option [value]="null">الكل</option>
+        <ng-container *ngIf="column.searchList">
+          <option *ngFor="let list of column.searchList" [ngValue]="searchListField(column, list)">
+            {{ list?.arabicName||list?.name }}
+          </option>
+        </ng-container>
+      </select>
+      <span *ngIf="column.searchValue">{{ getColumnSearchListName(column, column.searchValue) }}</span>
+        </th>
+
+      </tr>
+
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of filteredData">
+        <td *ngFor="let column of columns" [class]="column.class" [hidden]="!column.visible">
+          <ng-container *ngIf="!column.actions">
+            <ng-container *ngIf="column.type === 'html'">
+              <div [innerHTML]="column.format ? column.format(item[column.field]) : item[column.field]"
+                   [style]="column.style ? column.style(item[column.field]) : {}">
+              </div>
+            </ng-container>
+            <ng-container *ngIf="column.type !== 'html'">
+              <div [class]="column.class"
+                   [style]="column.style ? column.style(item[column.field]) : {}">
+                {{ column.format ? column.format(item[column.field]) : item[column.field] }}
+              </div>
+            </ng-container>
+          </ng-container>
+
+          <ng-container *ngIf="column.actions">
+            <ng-container>
+                <div class="dropdown">
+                  <a  class="dropdown-toggle" role="button" (click)="toggleDropdownAction(item)" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa-solid fa-bars"></i>
+                  </a>
+                  <div class="dropdown-menu dropdown-content" [class.show-action]="isDropdownVisible(item)" [class.hide]="!isDropdownVisible(item)" #selectDropdown>
+                   <a *ngFor="let action of column.actions(item); let i = index">
+                    <input class="button" *ngIf="action.visible(item)" type="button" (click)="action.action(item)" [class]="column.class" value={{action.label}} /></a>
+                  </div>
+                </div>
+            </ng-container>
+          </ng-container>
+        </td>
+      </tr>
+      <div *ngIf="noData" class="no-data">لا يوجد بيانات متوفرة</div>
+    </tbody>
+  </table>
+ </div>
+  <nav aria-label="pagination Page navigation example">
+    <ul class="pagination justify-content-start">
+      <li class="page-item mx-5" *ngIf="currentPage < totalPages" (click)="goToPage(currentPage + 1)">
+        <a class="page-link">التالي</a>
+      </li>
+      <li class="page-item">
+        <span>{{ currentPage }} / {{ totalPages }}</span>
+      </li>
+      <li class="page-item mx-5" *ngIf="currentPage <= totalPages && currentPage > 1" (click)="goToPage(currentPage - 1)">
+        <a class="page-link" tabindex="-1">السابق</a>
+      </li>
+    </ul>
+  </nav>
+</div>
+

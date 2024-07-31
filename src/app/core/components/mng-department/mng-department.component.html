@@ -1,0 +1,5 @@
+<h1>لائحة الإختصاصات</h1>
+<input type="submit" class="fadeIn fourth" (click)="onOpenAddDepModal()"   value="إضافة إختصاص">
+<app-department-dialog *ngIf ="onAddDep" (closeClicked) = "onCloseAddDepModal()" [isUpdate]='"false"'></app-department-dialog>
+<app-department-dialog *ngIf ="onEditDep" (closeClicked) = "onCloseEditDepModal()" [isUpdate]='"true"' [department]="updateDep"></app-department-dialog>
+<app-grid [pageSize]="10" [columns]="gridColumns" [BaseService]="departmentService" [GridOrder]="defaultOrder" [gridName]="'mngDepartment'" (search)="onSearch($event)"></app-grid>

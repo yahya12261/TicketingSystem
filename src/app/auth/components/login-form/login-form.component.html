@@ -1,0 +1,31 @@
+
+<div class="wrapper fadeInDown">
+  <img src="../../../../assets/static/logo.png" class="logo">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+    <h2 class="active">{{title}}</h2>
+
+    <!-- Login Form -->
+    <form *ngIf="fAuth">
+      <input type="text" id="login" class="fadeIn second" name="login" [(ngModel)]="user.username" placeholder="اسم المستخدم">
+      <input type="password" id="password" class="fadeIn third" name="login"  [(ngModel)]="user.password" placeholder="كلمة المرور">
+      <input type="submit" class="fadeIn fourth" (click)="onFAuthSubmit()" value="دخول">
+    </form>
+    <!-- 2 AUTH Form -->
+    <form [formGroup]="otpForm" *ngIf="sAuth" >
+      <input type="text" style="color: red" id="login" class="fadeIn second" placeholder="رمز للمرة الواحدة" formControlName="otp"  name="otp" [(ngModel)]="user.OTP" minlength="4" maxlength="6" required>
+      <input type="submit" class="fadeIn fourth" (click)="onSAuthSubmit()" value="دخول">
+    </form>
+    <!-- Remind Passowrd -->
+    <div id="formFooter" >
+      <div class="mt-3" *ngIf="errorMsg">
+        <p style="color: red">
+     {{errorMsg}}
+
+        </p>
+      </div>
+    </div>
+
+
+  </div>
+</div>

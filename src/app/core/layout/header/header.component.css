@@ -1,0 +1,78 @@
+.example-spacer {
+  flex: 1 1 auto;
+}
+/* toolbar.component.css */
+.mat-icon-button {
+  /* Background color of the button */
+  border-radius: 50%;
+  /* Make the button round */
+  width: 40px;
+  /* Adjust the button width as needed */
+  height: 40px;
+  /* Adjust the button height as needed */
+}
+/* toolbar.component.css */
+.custom-toolbar {
+  background-color:rgb(73 100 115);
+}
+.mat-toolbar {
+  color: #f0f0f0 !important;
+}
+.mat-icon-button {
+  color: #f0f0f0 !important;
+  background-color: #f0f0f0;
+  /* Background color of the button */
+  border-radius: 50%;
+  /* Make the button round */
+  width: 40px;
+  /* Adjust the button width as needed */
+  height: 40px;
+  /* Adjust the button height as needed */
+  transition: box-shadow 0.3s ease-in-out;
+  /* Add a smooth transition effect */
+}
+/* Style the button with the "neumorphic-button" class */
+.neumorphic-button {
+  color: white;
+  /* Background color of the button */
+  border-radius: 10px;
+  /* Adjust the border-radius for a softer look */
+  transition: transform 0.3s ease-in-out;
+}
+.neumorphic-button:hover {
+  transform: scale(1.05);
+}
+/* Adjust the button text color if needed */
+.neumorphic-button {
+  color: white !important;
+  /* Text color */
+}
+/* Add some spacing between the buttons */
+.custom-toolbar button:not(:last-child) {
+  margin-right: 10px;
+}
+.notification-icon {
+  color: #f0f0f0 !important;
+  transition: transform 0.2s ease;
+  /* Add smooth transition effect */
+}
+.notification-icon:hover {
+  transform: scale(1.2);
+  /* Scale the icon on hover */
+}
+body {
+  color: white !important;
+}
+.mat-mdc-icon-button {
+  color: white !important;
+}
+.menu-icon{
+  font-size: 25px;
+  padding: 5px;
+}
+.menu-icon:hover{
+  font-size: 25px;
+  padding: 5px;
+  color: blue;
+}
+

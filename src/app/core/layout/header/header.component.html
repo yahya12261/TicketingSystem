@@ -1,0 +1,22 @@
+<!-- toolbar.component.html -->
+<nav class="custom-toolbar navbar navbar-dark">
+ <a (click)="toggleSidebar()"><i class="fa-solid fa-bars menu-icon mat-toolbar"></i></a>
+   &nbsp;
+   <span class="mat-toolbar">برنامج تنظيم الخدمات</span>
+   <span class="example-spacer"></span>
+
+   &nbsp;
+
+ <a (click)="openConfirmationDialog()" class="neumorphic-button"><i class="fa-solid fa-door-closed p-2"></i>خروج</a>
+
+ </nav>
+
+
+ <app-confirmation-dialog
+  *ngIf="showConfirmationDialog"
+  [title]="title"
+  [message]="msg"
+  (yesClicked)="onYesClicked()"
+  (noClicked)="onNoClicked()"
+></app-confirmation-dialog>
+
