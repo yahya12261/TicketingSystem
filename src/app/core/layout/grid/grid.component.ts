@@ -20,6 +20,8 @@ export class GridComponent<T> implements OnInit {
   @Input() GridOrder: string = "";
 
   @Input() gridName:string = "";
+
+  @Input() path:string = "";
    // Declare baseService property
   @Output() search: EventEmitter<string> = new EventEmitter<string>();
 
@@ -124,8 +126,9 @@ export class GridComponent<T> implements OnInit {
     return column.searchListField(list);
   }
   getColumnSearchListName(column: any, searchValue: any): string {
-    const list = column.searchList?.find((item: { arabicName: string }) => item?.arabicName === searchValue);
-    return list ? list.arabicName : '';
+
+    const list = column.searchList?.find((item: { arabicLabel: string }) => item?.arabicLabel === searchValue);
+    return list ? list.arabicLabel : '';
   }
   getOperationByField(field:any):string | undefined{
     const option = this.columns?.find((option) => option.selectQueryName === field);
@@ -165,15 +168,16 @@ export class GridComponent<T> implements OnInit {
 
   loadData(query?:string) {
     this.spinner.show();
+
     if(query===undefined){
       query='';
       this.getOrderBy(undefined);
     }
 
-    this.BaseService.getAll(this.currentPage, this.pageSize,`?${query}${query?"&":""}${this.GridOrder}`)
- 
+    this.BaseService.getAll(this.currentPage, this.pageSize,`?${query}${query?"&":""}${this.GridOrder}`,this.path)
+
     .subscribe(data => {
-   
+
       console.log(data)
       const dynamicField = this.BaseService.type as keyof typeof data;
       this.filteredData = data.data.data ;

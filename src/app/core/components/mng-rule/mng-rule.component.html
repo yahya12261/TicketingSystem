@@ -1,0 +1,6 @@
+<h1>لائحة الصلاحيات</h1>
+<input type="submit" class="fadeIn fourth" (click)="onOpenAddRuleModal()"   value="إضافة صلاحية">
+<app-rule-dialog *ngIf ="onAddRule" (closeClicked) = "onCloseAddRuleModal()" [isUpdate]='"false"'></app-rule-dialog>
+<app-rule-dialog *ngIf ="onEditRule" (closeClicked) = "onCloseEditRuleModal()" [isUpdate]='"true"' [InpRule]="updateRule"></app-rule-dialog>
+<app-page-api-dialog *ngIf ="onShowPageApis" [ruleId]="selectedRule" (closeClicked) = "onClosePagesApi()"></app-page-api-dialog>
+<app-grid [pageSize]="10" [columns]="gridColumns" [BaseService]="service" [GridOrder]="defaultOrder" [gridName]="'mngRules'" (search)="onSearch($event)"></app-grid>

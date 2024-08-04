@@ -1,0 +1,37 @@
+
+
+
+
+
+
+<div class="confirmation-dialog-container">
+  <article class="modal-container">
+    <header class="modal-container-header">
+      <h2 class="modal-container-title">
+        <h1>لائحة صلاحيات الصفحات</h1>
+      </h2>
+    </header>
+    <section class="modal-container-body rtf">
+      <input type="submit" class="fadeIn fourth"  value="إضافة واجهة برمجية">
+      <app-grid [pageSize]="10" [columns]="gridColumns" [BaseService]="service" [GridOrder]="defaultOrder" [gridName]="'mngPagesApis'" (search)="onSearch($event)" [path]="path"></app-grid>
+    </section>
+    <footer class="modal-container-footer">
+      <button class="button is-ghost" (click)="onClose()" >إغلاق</button>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -22,6 +22,11 @@ import { DepartmentService } from './services/departmentService/department.servi
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { DepartmentDialogComponent } from './modals/department-dialog/department-dialog.component';
 import { CustomInputComponent } from './layout/custom-input/custom-input.component';
+import { MngPositionComponent } from './components/mng-position/mng-position.component';
+import { PositionDialogComponent } from './modals/position-dialog/position-dialog.component';
+import { MngRuleComponent } from './components/mng-rule/mng-rule.component';
+import { RuleDialogComponent } from './modals/rule-dialog/rule-dialog.component';
+import { PageApiDialogComponent } from './modals/page-api-dialog/page-api-dialog.component';
 @NgModule({
   declarations: [
     CoreComponent,
@@ -36,6 +41,11 @@ import { CustomInputComponent } from './layout/custom-input/custom-input.compone
     MngDepartmentComponent,
     DepartmentDialogComponent,
     CustomInputComponent,
+    MngPositionComponent,
+    PositionDialogComponent,
+    MngRuleComponent,
+    RuleDialogComponent,
+    PageApiDialogComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

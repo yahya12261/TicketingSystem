@@ -1,0 +1,8 @@
+<h1>لائحة المراتب</h1>
+<input type="submit" class="fadeIn fourth" (click)="onOpenAddPosModal()"   value="إضافة مرتبة">
+<app-position-dialog *ngIf ="onAddPos" (closeClicked) = "onCloseAddPosModal()" [isUpdate]='"false"'></app-position-dialog>
+<app-position-dialog *ngIf ="onEditPos" (closeClicked) = "onCloseEditPosModal()" [isUpdate]='"true"' [position]="updatePos"></app-position-dialog>
+<app-grid [pageSize]="10" [columns]="gridColumns" [BaseService]="service" [GridOrder]="defaultOrder" [gridName]="'mngPosition'" (search)="onSearch($event)"></app-grid>
+
+
+

@@ -43,7 +43,7 @@
         <option [value]="null">الكل</option>
         <ng-container *ngIf="column.searchList">
           <option *ngFor="let list of column.searchList" [ngValue]="searchListField(column, list)">
-            {{ list?.arabicName||list?.name }}
+            {{ list?.arabicLabel||list?.arabicLabel }}
           </option>
         </ng-container>
       </select>

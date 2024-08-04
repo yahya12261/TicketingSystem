@@ -5,6 +5,8 @@ import { HomeComponent } from './components/home/home.component';
 import { AuthGuard } from '../auth/Auth-Services/auth.guard';
 import { AdminComponent } from './components/admin/admin.component';
 import { MngDepartmentComponent } from './components/mng-department/mng-department.component';
+import { MngPositionComponent } from './components/mng-position/mng-position.component';
+import { MngRuleComponent } from './components/mng-rule/mng-rule.component';
 
 const routes: Routes = [
   {
@@ -14,6 +16,8 @@ const routes: Routes = [
     children: [
       { path: 'home', component: HomeComponent },
       { path: 'department', component: MngDepartmentComponent },
+      { path: 'position', component: MngPositionComponent },
+      { path: 'rule', component: MngRuleComponent },
       { path: 'admin', component: AdminComponent },
       { path: '**', redirectTo: 'home' },
     ],

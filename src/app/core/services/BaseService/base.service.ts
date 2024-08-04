@@ -42,7 +42,7 @@ export abstract class BaseService<T> {
   //   return headers;
   // }
 
-  getAll<T>(pageIndex?: number, pageSize?: number,query?:string): Observable<{data:any, success:boolean,message:string, }> {
+  getAll<T>(pageIndex?: number, pageSize?: number,query?:string,path:string=""): Observable<{data:any, success:boolean,message:string, }> {
 
     let params = new HttpParams();
     if(query===undefined)
@@ -51,11 +51,13 @@ export abstract class BaseService<T> {
       params = params.set('page', pageIndex.toString());
       params = params.set('pageSize', pageSize.toString());
     }
+
+    const url =this.apiUrl+path;
     // "currentPage": 1,
     // "total": 14,
     // "pageSize": 20
     const headers = this.getHeaders();
-    return this.http.get<{ data:any, success:boolean,message:string, }>(this.apiUrl+query, { headers, params });
+    return this.http.get<{ data:any, success:boolean,message:string, }>(url+query, { headers, params });
   }
   getAllWithQuery(query:string){
    return this.getAll(undefined,undefined,query)
@@ -69,6 +71,11 @@ export abstract class BaseService<T> {
   private generateBoundary(): string {
     const boundary = '----------' + Math.random().toString().substr(2, 25);
     return boundary;
+  }
+
+  getSelectOption<T>(): Observable<{data:any, success:boolean,message:string, }> {
+    const headers = this.getHeaders();
+    return this.http.get<{ data:any, success:boolean,message:string, }>(this.apiUrl+"/selectOption", { headers });
   }
 
   create(entity: { [key: string]: any }): Observable<{data:T,message:string,success:boolean}> {

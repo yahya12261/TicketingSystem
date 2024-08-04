@@ -1,12 +1,13 @@
-import { IBaseEntity } from "./BaseInterface"
-import { Position } from "./entities/Position"
-import { MethodTypes } from "../enum/MethodTypes"
+import { MethodTypes } from "../enums/MethodTypes";
+import { BaseInterface } from "./BaseInterface";
+import { IPosition } from "./Position";
 
-export interface IRule extends IBaseEntity {
-    name:String,
-    route:String,
-    code:String,
-    methodType:MethodTypes,
-    methodName:String,
-    position:Position[]
+
+export interface IRule extends BaseInterface {
+    name?:String,
+    route?:String,
+    code?:String,
+    methodType?:MethodTypes,
+    methodName?:String,
+    position?:IPosition[]
   }
