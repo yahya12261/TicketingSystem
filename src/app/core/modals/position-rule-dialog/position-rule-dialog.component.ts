@@ -1,25 +1,32 @@
-import { Component } from '@angular/core';
-import { IRule } from '../../Interfaces/Rule';
-import { GridColumn } from '../../Interfaces/GridColumn';
-import { InputType } from '../../enums/InputTypes';
-import { DateUtils } from '../../helpers/DateUtils';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { RuleService } from '../../services/RuleService/rule.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { OptionList } from '../../helpers/OptionList';
+import { InputType } from '../../enums/InputTypes';
+import { DateUtils } from '../../helpers/DateUtils';
+import { GridColumn } from '../../Interfaces/GridColumn';
+import { IRule } from '../../Interfaces/Rule';
+import { ToastService } from '../../services/ToastService/toast.service';
+import { IPosition } from '../../Interfaces/Position';
+import { PositionService } from '../../services/positionService/position.service';
 
 @Component({
-  selector: 'app-mng-rule',
-  templateUrl: './mng-rule.component.html',
-  styleUrls: ['./mng-rule.component.css']
+  selector: 'app-position-rule-dialog',
+  templateUrl: './position-rule-dialog.component.html',
+  styleUrls: ['./position-rule-dialog.component.css']
 })
-export class MngRuleComponent {
+export class PositionRuleDialogComponent implements
+OnInit{
   defaultOrder: string = 'orderBy=createdAt&order=DESC';
-  onAddRule = false;
-  onEditRule = false;
-  onShowPageApis = false;
-  up = false;
-  selectedRule!:IRule;
-  updateRule:IRule = {}as IRule
+  @Input() position !:IPosition;
+  @Output() closeClicked = new EventEmitter<void>();
+  onAddApi = false;
+  apiId!:number;
+  pages!:IRule[];
+  onClose(){
+    this.closeClicked.emit();
+  }
+  path!:string;
   gridColumns: GridColumn[] = [
     {
       header: 'إجراءات',
@@ -27,37 +34,16 @@ export class MngRuleComponent {
       field: 'id',
       searchableField: false,
       actions: (value: any) => {
-        return [
-          {
-            label: 'تعديل',
-            action: () => this.onOpenEditRuleModal(value),
-            visible: (item: any) => {
-              return true;
-            },
+        return [{
+          label: 'حذف',
+          action: () => this.deleteApi(value.id),
+          visible: (item: any) => {
+            return true;
           },
-          {
-            label: 'الصلاحيات',
-            action: () => this.onOpenPagesApi(value),
-            visible: (item: any) => {
-              return item.type ==="page";
-            },
-          }
+        },
         ];
       },
       isOrderByField: false,
-    },
-    {
-      header: 'تاريخ الإضافة',
-      visible: true,
-      field: 'createdAt',
-      type: InputType.DATE,
-      format: (value: any) => {
-        return DateUtils.formatDateTime(value);
-      },
-      searchableField: true,
-      selectQueryName: 'createdAt',
-      isOrderByField: true,
-      searchOperation: 'EQUAL',
     },
     {
       header: 'التسلسلي',
@@ -157,48 +143,71 @@ export class MngRuleComponent {
       isOrderByField: false,
     },
   ];
-
   constructor(
     public service: RuleService,
-    private spinner: NgxSpinnerService
+    public positionService:PositionService,
+    private spinner: NgxSpinnerService,
+    private toast : ToastService
   ) {
 
   }
-  onSearch(query: string) {}
-  onOpenAddRuleModal() {
-    if(!this.onAddRule){
+  ngOnInit(): void {
+    console.log(this.position)
+    this.path = "/positionRules/"+this.position.id;
+  }
+  onSearch(query: string) {
+  }
+
+
+  getApis():void{
     this.spinner.show();
-    this.onAddRule = true;
-    }
+      this.service.getAll(1,500,"?type=PAGE&typeOP=EQUAL","").subscribe(
+        data => {
+          this.pages = data.data.data;
+          this.spinner.hide();
+        },error=>{
+          this.toast.showError(error.error.massage)
+          this.spinner.hide();
+        });
   }
-
-  onCloseAddRuleModal(){
-    this.spinner.hide();
-    this.onAddRule = false;
+  onAddApiToPage(){
+    this.onAddApi = true;
+    this.getApis();
   }
-  ngInit(){
-
-  }
-  onOpenEditRuleModal(row:IRule) {
-    this.updateRule = row;
-    if(!this.onEditRule){
+  addApi(){
     this.spinner.show();
-    this.up=true;
-    this.onEditRule = true;}
+    this.positionService.addPageApi(Number(this.position.id),this.apiId).subscribe(data=>{
+      if(data.success){
+        this.toast.showSuccess(data.message)
+        this.spinner.hide();
+        this.onAddApi = false;
+      }else{
+        this.toast.showError(data.message)
+        this.spinner.hide();
+      }
+    },error=>{
+      this.toast.showError(error.error.message)
+      this.spinner.hide();
+
+    })
+  }
+  deleteApi(apiId:number){
+    this.spinner.show();
+    this.positionService.deletePageApi(Number(this.position.id),apiId).subscribe(data=>{
+      if(data.success){
+        this.toast.showSuccess(data.message)
+        this.spinner.hide();
+        this.onAddApi = false;
+      }else{
+        this.toast.showError(data.message)
+        this.spinner.hide();
+      }
+    },error=>{
+      this.toast.showError(error.error.message)
+      this.spinner.hide();
+
+    })
   }
 
-  onCloseEditRuleModal(){
-    this.spinner.hide();
-    this.onEditRule = false;
-  }
 
-  onOpenPagesApi(rule:IRule){
-    console.log(rule)
-    this.selectedRule = rule;
-    this.onShowPageApis = true;
-  }
-  onClosePagesApi(){
-    this.onShowPageApis = false;
-    this.selectedRule = {} ;
-  }
 }

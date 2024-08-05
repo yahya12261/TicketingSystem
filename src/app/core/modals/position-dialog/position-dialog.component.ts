@@ -53,7 +53,7 @@ OnInit{
   createForm(pos?:IPosition) {
     this.nameControl = this.formBuilder.control((pos)?pos.name:'', Validators.required);
     this.arabicNameControl = this.formBuilder.control((pos)?pos.arabicLabel:'', Validators.required);
-    this.departmentControl = this.formBuilder.control((pos)?pos.department.id:'',Validators.required);
+    this.departmentControl = this.formBuilder.control((pos)?pos.department?.id:'',Validators.required);
     this.noteControl = this.formBuilder.control((pos)?pos.note:'');
 
     this.myForm = this.formBuilder.group({

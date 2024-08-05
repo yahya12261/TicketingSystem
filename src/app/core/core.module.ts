@@ -27,6 +27,7 @@ import { PositionDialogComponent } from './modals/position-dialog/position-dialo
 import { MngRuleComponent } from './components/mng-rule/mng-rule.component';
 import { RuleDialogComponent } from './modals/rule-dialog/rule-dialog.component';
 import { PageApiDialogComponent } from './modals/page-api-dialog/page-api-dialog.component';
+import { PositionRuleDialogComponent } from './modals/position-rule-dialog/position-rule-dialog.component';
 @NgModule({
   declarations: [
     CoreComponent,
@@ -46,6 +47,7 @@ import { PageApiDialogComponent } from './modals/page-api-dialog/page-api-dialog
     MngRuleComponent,
     RuleDialogComponent,
     PageApiDialogComponent,
+    PositionRuleDialogComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

@@ -5,6 +5,8 @@ import { OptionList } from '../../helpers/OptionList';
 import { InputType } from '../../enums/InputTypes';
 import { DateUtils } from '../../helpers/DateUtils';
 import { GridColumn } from '../../Interfaces/GridColumn';
+import { IRule } from '../../Interfaces/Rule';
+import { ToastService } from '../../services/ToastService/toast.service';
 
 @Component({
   selector: 'app-page-api-dialog',
@@ -14,8 +16,11 @@ import { GridColumn } from '../../Interfaces/GridColumn';
 export class PageApiDialogComponent  implements
 OnInit{
   defaultOrder: string = 'orderBy=createdAt&order=DESC';
-  @Input() ruleId !:string;
+  @Input() rule !:IRule;
   @Output() closeClicked = new EventEmitter<void>();
+  onAddApi = false;
+  apiId!:number;
+  APIs!:IRule[];
   onClose(){
     this.closeClicked.emit();
   }
@@ -27,7 +32,13 @@ OnInit{
       field: 'id',
       searchableField: false,
       actions: (value: any) => {
-        return [
+        return [{
+          label: 'حذف',
+          action: () => this.deleteApi(value.id),
+          visible: (item: any) => {
+            return true;
+          },
+        },
         ];
       },
       isOrderByField: false,
@@ -132,17 +143,68 @@ OnInit{
   ];
   constructor(
     public service: RuleService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private toast : ToastService
   ) {
 
   }
   ngOnInit(): void {
-    console.log(this.ruleId)
-    this.path = "/getPagesApis/"+this.ruleId;
+    console.log(this.rule)
+    this.path = "/getPagesApis/"+this.rule.id;
   }
   onSearch(query: string) {
-
-
   }
+
+
+  getApis():void{
+    this.spinner.show();
+      this.service.getAll(1,500,"?type=API&typeOP=EQUAL","").subscribe(
+        data => {
+          this.APIs = data.data.data;
+          this.spinner.hide();
+        },error=>{
+          this.toast.showError(error.error.massage)
+          this.spinner.hide();
+        });
+  }
+  onAddApiToPage(){
+    this.onAddApi = true;
+    this.getApis();
+  }
+  addApi(){
+    this.spinner.show();
+    this.service.addPageApi(Number(this.rule.id),this.apiId).subscribe(data=>{
+      if(data.success){
+        this.toast.showSuccess(data.message)
+        this.spinner.hide();
+        this.onAddApi = false;
+      }else{
+        this.toast.showError(data.message)
+        this.spinner.hide();
+      }
+    },error=>{
+      this.toast.showError(error.error.message)
+      this.spinner.hide();
+
+    })
+  }
+  deleteApi(apiId:number){
+    this.spinner.show();
+    this.service.deletePageApi(Number(this.rule.id),apiId).subscribe(data=>{
+      if(data.success){
+        this.toast.showSuccess(data.message)
+        this.spinner.hide();
+        this.onAddApi = false;
+      }else{
+        this.toast.showError(data.message)
+        this.spinner.hide();
+      }
+    },error=>{
+      this.toast.showError(error.error.message)
+      this.spinner.hide();
+
+    })
+  }
+
 
 }

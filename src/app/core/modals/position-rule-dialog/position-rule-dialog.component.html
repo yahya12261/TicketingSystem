@@ -8,24 +8,24 @@
   <article class="modal-container">
     <header class="modal-container-header">
       <h2 class="modal-container-title">
-        <h1>{{rule.arabicLabel}}</h1>
+        <h1>{{position.arabicLabel}}</h1>
       </h2>
     </header>
 
     <section class="modal-container-body rtf">
-      <input *ngIf="!onAddApi" type="submit" class="fadeIn fourth" (click)="onAddApiToPage()"  value="إضافة واجهة برمجية">
+      <input *ngIf="!onAddApi" type="submit" class="fadeIn fourth" (click)="onAddApiToPage()"  value="إضافة صلاحية">
 
       <div *ngIf="onAddApi">
         <select  class="form-control"  [(ngModel)]="apiId">
           <option >
           </option>
-            <option *ngFor="let api of APIs" value="{{api.id}}">
-              {{api?.name}}--{{ api?.methodType}}
+            <option *ngFor="let page of pages" value="{{page.id}}">
+              {{page?.name}}--{{ page?.methodType}}
             </option>
         </select>
         <input *ngIf="onAddApi" type="submit" class="fadeIn fourth" (click)="addApi()"  value="إضافة">
       </div>
-      <app-grid [pageSize]="10" [columns]="gridColumns" [BaseService]="service" [GridOrder]="defaultOrder" [gridName]="'mngPagesApis'" (search)="onSearch($event)" [path]="path"></app-grid>
+      <app-grid [pageSize]="10" [columns]="gridColumns" [BaseService]="positionService" [GridOrder]="defaultOrder" [gridName]="'mngPositionRules'" (search)="onSearch($event)" [path]="path"></app-grid>
     </section>
     <footer class="modal-container-footer">
       <button class="button is-ghost" (click)="onClose()" >إغلاق</button>

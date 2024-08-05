@@ -18,7 +18,9 @@ export class MngPositionComponent {
   defaultOrder: string = 'orderBy=createdAt&order=DESC';
   onAddPos = false;
   onEditPos = false;
-  updatePos:IPosition = {} as IPosition
+  selectedPosition = {}as IPosition;
+  updatePos:IPosition = {} as IPosition;
+  accessModal = false
   constructor(
     public service: PositionService,
     private spinner: NgxSpinnerService,
@@ -41,6 +43,13 @@ export class MngPositionComponent {
               return true;
             },
           },
+          {
+            label: 'الصلاحيات',
+            action: () => this.onOpenAccessModal(value),
+            visible: (item: any) => {
+              return true;
+            },
+          }
         ];
       },
       isOrderByField: false,
@@ -135,6 +144,15 @@ export class MngPositionComponent {
           this.gridColumns[4].searchList =  data.data;
         }
       })
+  }
+  onOpenAccessModal(rule:IPosition){
+    console.log(rule)
+    this.selectedPosition = rule;
+    this.accessModal = true;
+  }
+  onCloseAccessModal(){
+    this.accessModal = false;
+    this.selectedPosition = {} ;
   }
 
 

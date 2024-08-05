@@ -177,8 +177,6 @@ export class GridComponent<T> implements OnInit {
     this.BaseService.getAll(this.currentPage, this.pageSize,`?${query}${query?"&":""}${this.GridOrder}`,this.path)
 
     .subscribe(data => {
-
-      console.log(data)
       const dynamicField = this.BaseService.type as keyof typeof data;
       this.filteredData = data.data.data ;
       console.log(this.filteredData)
