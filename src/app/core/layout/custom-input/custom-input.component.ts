@@ -58,7 +58,6 @@ export class CustomInputComponent implements ControlValueAccessor, OnInit {
   @Input() label!: string;
   @Input() type: string = 'text';
   @Input() id!: string;
-
   @Input() control!: FormControl;
   @Input() required !:string
   @Input() dis!:string;

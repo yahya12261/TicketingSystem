@@ -1,0 +1,59 @@
+<div class="confirmation-dialog-container">
+  <article class="modal-container">
+    <header class="modal-container-header">
+      <h2 class="modal-container-title">
+        {{isUpdate==="true"?"تعديل المستخدم":"إضافة مستخدم"}}
+      </h2>
+    </header>
+    <section class="modal-container-body rtf">
+      <form [formGroup]="myForm" >
+        <div class="container">
+          <div class="row">
+            <div class="col-4">
+            <app-custom-input label="الأسم الأول" formControlName="first" [control]="firstControl" required="true" [dis]="isUpdate==='true'?'true':'false'"></app-custom-input>
+            </div>
+            <div class="col-4">
+              <app-custom-input label="اسم الأب" formControlName="middle" [control]="middleControl" required="true" ></app-custom-input>
+              </div>
+              <div class="col-4">
+                <app-custom-input label="الشهرة" formControlName="last" [control]="lastControl" required="true" [dis]="isUpdate==='true'?'true':'false'"></app-custom-input>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-4">
+                  <app-custom-input label="الأسم بالكامل باللغة العربية" formControlName="arabicName" [control]="arabicLabelControl" required="true" ></app-custom-input>
+                </div>
+                <div class="col-4">
+                  <app-custom-input label="البريد الإلكتروني" formControlName="arabicName" [control]="emailControl" required="true" ></app-custom-input>
+                </div>
+                <div class="col-4">
+                  <app-custom-input label="اسم المستخدم" formControlName="arabicName" [control]="usernameControl" required="true" [dis]="isUpdate==='true'?'true':'false'"></app-custom-input>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <app-custom-input label="رقم الهاتف" formControlName="arabicName" [control]="phoneNumberControl" required="true" ></app-custom-input>
+                </div>
+                <div class="col-6">
+                  <app-custom-select
+                      [label]="'المرتبة'"
+                      [control]="positionControl"
+                      [required]="true"
+                      [disabled]="isUpdate==='true'?'true':'false'"
+                      [errorMessage]="'يرجى اختير المرتبة'"
+                      [placeholder]="'Select a type'"
+                      [options]="positionOption"
+                      [labelValue]="'arabicLabel'"
+                      [value]="'id'"
+                    ></app-custom-select>
+                </div>
+              </div>
+        </div>
+      </form>
+    </section>
+    <footer class="modal-container-footer">
+      <button class="button is-ghost" (click)="onClose()" >إلغاء</button>
+      <button class="button is-primary" (click)="isUpdate=='false'?onSubmit():onUpdate()" > {{isUpdate==="true"?"تعديل":"إضافة"}} </button>
+    </footer>
+  </article>
+</div>

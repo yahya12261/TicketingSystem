@@ -28,6 +28,9 @@ import { MngRuleComponent } from './components/mng-rule/mng-rule.component';
 import { RuleDialogComponent } from './modals/rule-dialog/rule-dialog.component';
 import { PageApiDialogComponent } from './modals/page-api-dialog/page-api-dialog.component';
 import { PositionRuleDialogComponent } from './modals/position-rule-dialog/position-rule-dialog.component';
+import { MngUsersComponent } from './components/mng-users/mng-users.component';
+import { UserDialogComponent } from './modals/user-dialog/user-dialog.component';
+import { CustomSelectComponent } from './layout/custom-select/custom-select.component';
 @NgModule({
   declarations: [
     CoreComponent,
@@ -48,6 +51,9 @@ import { PositionRuleDialogComponent } from './modals/position-rule-dialog/posit
     RuleDialogComponent,
     PageApiDialogComponent,
     PositionRuleDialogComponent,
+    MngUsersComponent,
+    UserDialogComponent,
+    CustomSelectComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

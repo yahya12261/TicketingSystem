@@ -7,6 +7,7 @@ import { AdminComponent } from './components/admin/admin.component';
 import { MngDepartmentComponent } from './components/mng-department/mng-department.component';
 import { MngPositionComponent } from './components/mng-position/mng-position.component';
 import { MngRuleComponent } from './components/mng-rule/mng-rule.component';
+import { MngUsersComponent } from './components/mng-users/mng-users.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,7 @@ const routes: Routes = [
       { path: 'department', component: MngDepartmentComponent },
       { path: 'position', component: MngPositionComponent },
       { path: 'rule', component: MngRuleComponent },
+      { path: 'users', component: MngUsersComponent },
       { path: 'admin', component: AdminComponent },
       { path: '**', redirectTo: 'home' },
     ],
