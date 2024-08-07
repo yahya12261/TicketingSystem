@@ -65,7 +65,7 @@ OnInit{
     this.lastControl = this.formBuilder.control((user)?user.last:"",Validators.required);
     this.arabicLabelControl = this.formBuilder.control((user)?user.arabicLabel:"",Validators.required)
     this.emailControl = this.formBuilder.control((user)?user.email:"",[Validators.required,Validators.email]);
-    this.usernameControl = this.formBuilder.control((user)?user.username:"",Validators.required);
+    this.usernameControl = this.formBuilder.control((user)?user.username:"");
     this.phoneNumberControl = this.formBuilder.control((user)?user.phoneNumber:"",Validators.required);
     this.positionControl = this.formBuilder.control((user)?user.position?.id:"",Validators.required);
     this.myForm = this.formBuilder.group({
@@ -106,14 +106,14 @@ OnInit{
     this.setInvalidInputBorder();
   } else {
     const user:IUser = {
-      first:this.myForm.value,
-      middle:this.myForm.value,
-      last:this.myForm.value,
-      arabicLabel:this.myForm.value,
-      email:this.myForm.value,
-      username:this.myForm.value,
-      phoneNumber:this.myForm.value,
-      position:this.myForm.value,
+      first:this.myForm.value.first,
+      middle:this.myForm.value.middle,
+      last:this.myForm.value.last,
+      arabicLabel:this.myForm.value.arabicLabel,
+      email:this.myForm.value.email,
+      username:this.myForm.value.username,
+      phoneNumber:this.myForm.value.phoneNumber,
+      position:{id:this.myForm.value.position},
     }
     this.service.create(user).subscribe(result=>{
       if(result.success){

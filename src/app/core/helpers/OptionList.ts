@@ -21,6 +21,12 @@ export class OptionList{
           { arabicLabel: 'OPTION' },
           { arabicLabel: 'DELETE' },
         ];
+        case "activeInactive":
+          return [
+            {id:"1",arabicLabel:"مفعل"},
+            {id:"0",arabicLabel:"غير مفعل"}
+          ];
+
     }
     return [];
   }

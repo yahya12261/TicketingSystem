@@ -21,27 +21,28 @@
               </div>
               <div class="row">
                 <div class="col-4">
-                  <app-custom-input label="الأسم بالكامل باللغة العربية" formControlName="arabicName" [control]="arabicLabelControl" required="true" ></app-custom-input>
+                  <app-custom-input label="الأسم باللغة العربية" formControlName="arabicLabel" [control]="arabicLabelControl" required="true" ></app-custom-input>
                 </div>
                 <div class="col-4">
-                  <app-custom-input label="البريد الإلكتروني" formControlName="arabicName" [control]="emailControl" required="true" ></app-custom-input>
+                  <app-custom-input label="البريد الإلكتروني" formControlName="email" [control]="emailControl" required="true" ></app-custom-input>
                 </div>
                 <div class="col-4">
-                  <app-custom-input label="اسم المستخدم" formControlName="arabicName" [control]="usernameControl" required="true" [dis]="isUpdate==='true'?'true':'false'"></app-custom-input>
+                  <app-custom-input  label="اسم المستخدم" formControlName="username" [control]="usernameControl" [dis]="'true'"></app-custom-input>
                 </div>
               </div>
               <div class="row">
                 <div class="col-6">
-                  <app-custom-input label="رقم الهاتف" formControlName="arabicName" [control]="phoneNumberControl" required="true" ></app-custom-input>
+                  <app-custom-input label="رقم الهاتف" formControlName="phoneNumber" [control]="phoneNumberControl" required="true" ></app-custom-input>
                 </div>
                 <div class="col-6">
                   <app-custom-select
+                      formControlName="position"
                       [label]="'المرتبة'"
                       [control]="positionControl"
                       [required]="true"
-                      [disabled]="isUpdate==='true'?'true':'false'"
-                      [errorMessage]="'يرجى اختير المرتبة'"
-                      [placeholder]="'Select a type'"
+
+                      [errorMessage]="'حقل إجباري'"
+                      [placeholder]="'يرجى اختيار مرتبة'"
                       [options]="positionOption"
                       [labelValue]="'arabicLabel'"
                       [value]="'id'"
