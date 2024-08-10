@@ -68,6 +68,19 @@ export class MngUsersComponent {
 //       "note": null,
 //       "name": "PMO"
 //   }
+// "department": {
+//                         "uuid": "28cbc053-897e-4c63-92b4-7ebbf02b5e29",
+//                         "type": "",
+//                         "id": 1,
+//                         "createdAt": "2024-07-13T03:46:44.911Z",
+//                         "updatedAt": "2024-07-31T00:26:34.000Z",
+//                         "deletedAt": null,
+//                         "version": 2,
+//                         "dsc": null,
+//                         "arabicLabel": "فريق الدعم التقني",
+//                         "isActive": true,
+//                         "note": null,
+//                         "name": "task force"
 // },
   gridColumns: GridColumn[] =[
     {
@@ -197,10 +210,27 @@ export class MngUsersComponent {
         return list.id;
       },
       searchableField: true,
-      selectQueryName: 'position.department.id',
+      selectQueryName: 'department.id',
       isOrderByField: true,
       searchOperation: 'EQUAL',
     },
+    {
+      header: 'المرتبة',
+      visible: true,
+      field: 'position',
+      type: InputType.LIST,
+      format(value) {
+        return `${value.arabicLabel}`
+      },
+      searchListField: (list: any) => {
+        return list.id;
+      },
+      searchableField: true,
+      selectQueryName: 'position.id',
+      isOrderByField: true,
+      searchOperation: 'EQUAL',
+    },
+
     // {
     //   header: 'اسم المستخدم',
     //   visible: true,
@@ -265,7 +295,7 @@ export class MngUsersComponent {
   fetchAllPositions(){
       this.positionService.getSelectOption().subscribe(data=>{
         if(data.success){
-          this.gridColumns[4].searchList =  data.data;
+          this.gridColumns[9].searchList =  data.data;
         }
       })
   }
