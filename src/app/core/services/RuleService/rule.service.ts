@@ -35,5 +35,16 @@ export class RuleService extends BaseService<IRule>{
       })
     );
   }
+  mkUnmkDefault(uuid:string):Observable<{data:string,message:string,success:boolean}>{
+    const headers = this.getHeaders();
+    return this.http.patch<any>(this.apiUrl+"/mk-unmk-default", {uuid:uuid}, { headers }).pipe(
+      switchMap((response) => {
+          return of({data:response.data as string,
+            message:response.message,
+            success:response.success
+          });
+      })
+    );
+  }
 
 }

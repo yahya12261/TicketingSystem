@@ -20,7 +20,7 @@ export class MngPositionComponent {
   onEditPos = false;
   selectedPosition = {}as IPosition;
   updatePos:IPosition = {} as IPosition;
-  accessModal = false
+  accessModal = false;
   constructor(
     public service: PositionService,
     private spinner: NgxSpinnerService,

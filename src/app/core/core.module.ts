@@ -14,7 +14,7 @@ import { GridComponent } from './layout/grid/grid.component';
 import { BaseService } from './services/BaseService/base.service';
 import { ToastrModule } from 'ngx-toastr';
 import { DatePipe } from '@angular/common';
-import { DateFormatDirective  } from './decorator/date.directive';
+
 import {Ng2TelInputModule} from 'ng2-tel-input';
 import { AdminComponent } from './components/admin/admin.component';
 import { MngDepartmentComponent } from './components/mng-department/mng-department.component';
@@ -31,6 +31,9 @@ import { PositionRuleDialogComponent } from './modals/position-rule-dialog/posit
 import { MngUsersComponent } from './components/mng-users/mng-users.component';
 import { UserDialogComponent } from './modals/user-dialog/user-dialog.component';
 import { CustomSelectComponent } from './layout/custom-select/custom-select.component';
+import { UserRuleDialogComponent } from './modals/user-rule-dialog/user-rule-dialog.component';
+import { PermissionCheckDirective } from './directive/permission-check.directive';
+import { DateFormatDirective } from './directive/date.directive';
 @NgModule({
   declarations: [
     CoreComponent,
@@ -54,6 +57,8 @@ import { CustomSelectComponent } from './layout/custom-select/custom-select.comp
     MngUsersComponent,
     UserDialogComponent,
     CustomSelectComponent,
+    UserRuleDialogComponent,
+    PermissionCheckDirective,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

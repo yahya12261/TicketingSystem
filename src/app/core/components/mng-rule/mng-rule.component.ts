@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { IRule } from '../../Interfaces/Rule';
 import { GridColumn } from '../../Interfaces/GridColumn';
 import { InputType } from '../../enums/InputTypes';
@@ -6,6 +6,8 @@ import { DateUtils } from '../../helpers/DateUtils';
 import { RuleService } from '../../services/RuleService/rule.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { OptionList } from '../../helpers/OptionList';
+import { ToastService } from '../../services/ToastService/toast.service';
+import { GridComponent } from '../../layout/grid/grid.component';
 
 @Component({
   selector: 'app-mng-rule',
@@ -20,6 +22,7 @@ export class MngRuleComponent {
   up = false;
   selectedRule!:IRule;
   updateRule:IRule = {}as IRule
+  @ViewChild(GridComponent, { static: true }) childComponent!: GridComponent<IRule>;
   gridColumns: GridColumn[] = [
     {
       header: 'إجراءات',
@@ -41,7 +44,21 @@ export class MngRuleComponent {
             visible: (item: any) => {
               return item.type ==="page";
             },
-          }
+          },
+          {
+            label: 'وضع صلاحية إفتراضية',
+            action: () => this.mkUnmkDefault(value.uuid),
+            visible: (item: any) => {
+              return !item.isDefault;
+            },
+          },
+          {
+            label: 'وضع صلاحية غير إفتراضية',
+            action: () => this.mkUnmkDefault(value.uuid),
+            visible: (item: any) => {
+              return item.isDefault;
+            },
+          },
         ];
       },
       isOrderByField: false,
@@ -91,7 +108,7 @@ export class MngRuleComponent {
     },
     {
       header: 'Route',
-      visible: true,
+      visible: false,
       field: 'route',
       type: InputType.TEXT,
       searchableField: true,
@@ -101,7 +118,7 @@ export class MngRuleComponent {
     },
     {
       header: 'code',
-      visible: true,
+      visible: false,
       field: 'code',
       type: InputType.TEXT,
       searchableField: true,
@@ -125,7 +142,7 @@ export class MngRuleComponent {
     },
     {
       header: 'METHODNAME',
-      visible: true,
+      visible: false,
       field: 'methodName',
       type: InputType.TEXT,
       searchableField: true,
@@ -148,6 +165,26 @@ export class MngRuleComponent {
       },
     },
     {
+      header: 'إفتراضي',
+      visible: true,
+      field: 'isDefault',
+      type: InputType.LIST,
+      format(value) {
+        return value ? 'نعم' : 'كلا';
+      },
+      style: (value: any) => {
+        return { color: value ? 'blue' : 'black' };
+      },
+      searchList: OptionList.getListByName('yesNo'),
+      searchListField: (list: any) => {
+        return list.id;
+      },
+      searchableField: true,
+      selectQueryName: 'isDefault',
+      isOrderByField: true,
+      searchOperation: 'EQUAL',
+    },
+    {
       header: 'ملاحظات',
       visible: true,
       field: 'note',
@@ -160,7 +197,8 @@ export class MngRuleComponent {
 
   constructor(
     public service: RuleService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private toastService: ToastService
   ) {
 
   }
@@ -200,5 +238,22 @@ export class MngRuleComponent {
   onClosePagesApi(){
     this.onShowPageApis = false;
     this.selectedRule = {} ;
+  }
+
+  mkUnmkDefault(uuid:string){
+    this.spinner.show();
+    this.service.mkUnmkDefault(uuid).subscribe((data) => {
+      if (data.success) {
+        this.spinner.hide();
+        this.toastService.showSuccess(data.message);
+        this.childComponent.clearFilter();
+      }else{
+        this.spinner.hide();
+        this.toastService.showError(data.message);
+      }
+    },(error)=>{
+      this.spinner.hide();
+      this.toastService.showError(error.message.message);
+    });
   }
 }

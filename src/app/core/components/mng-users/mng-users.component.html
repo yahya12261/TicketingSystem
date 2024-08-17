@@ -2,7 +2,7 @@
 <input type="submit" class="fadeIn fourth" (click)="onOpenAddUserModal()"   value="إضافة مستخدم">
 <app-user-dialog *ngIf ="onAddUser" (closeClicked) = "onCloseAddUserModal()" [isUpdate]='"false"'></app-user-dialog>
 <app-user-dialog *ngIf ="onEditUser" (closeClicked) = "onCloseEditUserModal()" [isUpdate]='"true"' [InpUser]="updateUser"></app-user-dialog>
-<!-- <app-position-rule-dialog *ngIf ="accessModal" [position]="selectedPosition" (closeClicked) = "onCloseAccessModal()"></app-position-rule-dialog> -->
+ <app-user-rule-dialog *ngIf ="accessModal" [user]="selectedUser" (closeClicked) = "onCloseAccessModal()"></app-user-rule-dialog>
 <app-grid [pageSize]="10" [columns]="gridColumns" [BaseService]="service" [GridOrder]="defaultOrder" [gridName]="'mngUsers'" (search)="onSearch($event)"></app-grid>
 
 

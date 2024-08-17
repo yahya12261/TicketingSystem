@@ -77,8 +77,11 @@
                     <i class="fa-solid fa-bars"></i>
                   </a>
                   <div class="dropdown-menu dropdown-content" [class.show-action]="isDropdownVisible(item)" [class.hide]="!isDropdownVisible(item)" #selectDropdown>
-                   <a *ngFor="let action of column.actions(item); let i = index">
-                    <input class="button" *ngIf="action.visible(item)" type="button" (click)="action.action(item)" [class]="column.class" value={{action.label}} /></a>
+                    <ng-container *ngFor="let action of column.actions(item); let i = index">
+                      <a *ngIf="action.visible(item)">
+                        <input class="button" type="button" (click)="action.action(item)" [class]="column.class" value="{{ action.label }}" />
+                      </a>
+                    </ng-container>
                   </div>
                 </div>
             </ng-container>

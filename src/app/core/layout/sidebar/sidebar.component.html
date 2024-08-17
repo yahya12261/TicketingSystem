@@ -7,7 +7,7 @@
     </li>
     <hr>
     <li>
-      <a routerLinkActive="active" (click)="showNotAvailbleNow()">
+      <a routerLinkActive="active" *permissionCheck="'Core'" (click)="showNotAvailbleNow()">
         <span class="menu-text"><i class="fa-solid fa-toolbox p-1"></i>الخدمات</span>
       </a>
     </li>
@@ -18,29 +18,29 @@
     </li>
     <li>
       <div class="dropdown">
-        <a class="dropdown-toggle" role="button" (mouseover)="toggleDropdown()" aria-haspopup="true" aria-expanded="false">
+        <a *permissionCheck="'administrator'" class="dropdown-toggle" role="button" (mouseover)="toggleDropdown()" aria-haspopup="true" aria-expanded="false">
           <span class="menu-text"><i class="fa-sharp fa-solid fa-user-tie p-1"></i>لوحة القيادة</span>
         </a>
-        <div class="dropdown-menu" style="background-color: transparent;" [class.show]="dropdownVisible" [class.hide]="!dropdownVisible" #selectDropdown>
-          <a class="dropdown-item" routerLinkActive="active" (click)="goTo('core/department')">
+        <div class="dropdown-menu"  style="background-color: transparent;" [class.show]="dropdownVisible" [class.hide]="!dropdownVisible" #selectDropdown>
+          <a *permissionCheck="'department'"  class="dropdown-item" routerLinkActive="active" (click)="goTo('core/department')">
             <span class="menu-text"> <i class="fa-solid fa-list-ul p-1"></i>الإختصاصات</span>
           </a>
-          <a class="dropdown-item" routerLinkActive="active" (click)="goTo('core/position')">
+          <a *permissionCheck="'positions'" class="dropdown-item" routerLinkActive="active" (click)="goTo('core/position')">
             <span class="menu-text"><i class="fa-solid fa-list-ul p-1"></i>المراتب</span>
           </a>
-          <a class="dropdown-item" routerLinkActive="active" (click)="goTo('core/rule')">
+          <a *permissionCheck="'rules'" class="dropdown-item" routerLinkActive="active" (click)="goTo('core/rule')">
             <span class="menu-text"><i class="fa-solid fa-list-ul p-1"></i>الصلاحيات</span>
           </a>
-          <a class="dropdown-item" routerLinkActive="active" (click)="goTo('core/users')">
+          <a *permissionCheck="'users'" class="dropdown-item" routerLinkActive="active" (click)="goTo('core/users')">
             <span class="menu-text"><i class="fa-solid fa-list-ul p-1"></i>المستخدمون</span>
           </a>
-          <a class="dropdown-item" routerLinkActive="active" (click)="showNotAvailbleNow()">
+          <a *permissionCheck="'unknown'" class="dropdown-item" routerLinkActive="active" (click)="showNotAvailbleNow()">
             <span class="menu-text"><i class="fa-solid fa-list-ul p-1"></i>المستخدمون</span>
           </a>
-          <a class="dropdown-item" routerLinkActive="active" (click)="showNotAvailbleNow()">
+          <a *permissionCheck="'unknown'" class="dropdown-item" routerLinkActive="active" (click)="showNotAvailbleNow()">
             <span class="menu-text"><i class="fa-solid fa-list-ul p-1"></i>المستخدمون</span>
           </a>
-          <a class="dropdown-item" routerLinkActive="active" (click)="showNotAvailbleNow()">
+          <a *permissionCheck="'unknown'" class="dropdown-item" routerLinkActive="active"  (click)="showNotAvailbleNow()">
             <span class="menu-text"><i class="fa-solid fa-list-ul p-1"></i>المستخدمون</span>
           </a>
         </div>

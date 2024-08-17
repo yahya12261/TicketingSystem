@@ -93,10 +93,15 @@ export class LoginFormComponent implements OnInit {
         next:(data)=>{
           if(data.success){
           this.toast.showSuccess(data.message);
-          localStorage.setItem('token', data.data);
+          localStorage.setItem('token', data.data.JWT);
           localStorage.setItem('uuid',this.user.uuid+"");
-          this.router.navigateByUrl('Main');
-          this.apiService.setLoggedIn(true);
+          // this.router.navigateByUrl('Main');
+          if(data.data.resetPass){
+            this.router.navigateByUrl("/auth/reset-password/"+data.data.JWT)
+          }else{
+            this.router.navigateByUrl("core/");
+            this.apiService.setLoggedIn(true);
+          }
           this.spinner.hide();
           this.clearUser();
           // window.location.reload();
