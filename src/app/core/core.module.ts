@@ -34,6 +34,11 @@ import { CustomSelectComponent } from './layout/custom-select/custom-select.comp
 import { UserRuleDialogComponent } from './modals/user-rule-dialog/user-rule-dialog.component';
 import { PermissionCheckDirective } from './directive/permission-check.directive';
 import { DateFormatDirective } from './directive/date.directive';
+import { MngGovernmentComponent } from './components/Setup/mng-government/mng-government.component';
+import { MngCazaComponent } from './components/Setup/mng-caza/mng-caza.component';
+import { MngTownComponent } from './components/Setup/mng-town/mng-town.component';
+import { GovernmentDialogComponent } from './modals/government-dialog/government-dialog.component';
+import { CazaDialogComponent } from './modals/Setup/caza-dialog/caza-dialog.component';
 @NgModule({
   declarations: [
     CoreComponent,
@@ -59,6 +64,11 @@ import { DateFormatDirective } from './directive/date.directive';
     CustomSelectComponent,
     UserRuleDialogComponent,
     PermissionCheckDirective,
+    MngGovernmentComponent,
+    MngCazaComponent,
+    MngTownComponent,
+    GovernmentDialogComponent,
+    CazaDialogComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
