@@ -20,6 +20,7 @@ OnInit{
   arabicNameControl!: FormControl;
   departmentControl!: FormControl;
   noteControl!: FormControl;
+  
   departments:IDepartment[] = [{}] as IDepartment[];
   @Input() isUpdate !:"true"|"false";
   @Input() position !:IPosition;

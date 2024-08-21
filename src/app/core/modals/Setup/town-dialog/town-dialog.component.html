@@ -24,6 +24,23 @@
             </div>
             </div>
           </div>
+          <div class="row">
+            <div class="col-12">
+              <div class="form-group">
+                <app-custom-select
+                formControlName="caza"
+                [label]="'القضاء'"
+                [control]="cazaControl"
+                [required]="true"
+                [errorMessage]="'حقل إجباري'"
+                [placeholder]="'يرجى اختيار قضاء'"
+                [options]="cazas"
+                [labelValue]="'arabicLabel'"
+                [value]="'id'"
+              ></app-custom-select>
+              </div>
+              </div>
+        </div>
         </div>
       </form>
     </section>

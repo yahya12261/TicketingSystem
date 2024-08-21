@@ -39,6 +39,7 @@ import { MngCazaComponent } from './components/Setup/mng-caza/mng-caza.component
 import { MngTownComponent } from './components/Setup/mng-town/mng-town.component';
 import { GovernmentDialogComponent } from './modals/government-dialog/government-dialog.component';
 import { CazaDialogComponent } from './modals/Setup/caza-dialog/caza-dialog.component';
+import { TownDialogComponent } from './modals/Setup/town-dialog/town-dialog.component';
 @NgModule({
   declarations: [
     CoreComponent,
@@ -69,6 +70,7 @@ import { CazaDialogComponent } from './modals/Setup/caza-dialog/caza-dialog.comp
     MngTownComponent,
     GovernmentDialogComponent,
     CazaDialogComponent,
+    TownDialogComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

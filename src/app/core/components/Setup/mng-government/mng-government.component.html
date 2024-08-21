@@ -1,1 +1,5 @@
-<p>mng-government works!</p>
+<h1>لائحة المحافظات</h1>
+<input type="submit" class="fadeIn fourth" (click)="onOpenAddModal()"   value="إضافة محافظة">
+<app-government-dialog *ngIf ="onAdd" (closeClicked) = "onCloseAddModal()" [isUpdate]='"false"'></app-government-dialog>
+<app-government-dialog *ngIf ="onEdit" (closeClicked) = "onCloseEditModal()" [isUpdate]='"true"' [inpGovernment]="update"></app-government-dialog>
+<app-grid [pageSize]="10" [columns]="gridColumns" [BaseService]="governmentService" [GridOrder]="defaultOrder" [gridName]="'mngGovernment'" (search)="onSearch($event)"></app-grid>
