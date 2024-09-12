@@ -1,0 +1,5 @@
+<h1>لائحة الخدمات</h1>
+<input type="submit" class="fadeIn fourth" (click)="onOpenAddModal()"   value="إضافة خدمة">
+<app-service-dialog *ngIf ="onAdd" (closeClicked) = "onCloseAddModal()" [isUpdate]='"false"'></app-service-dialog>
+<app-service-dialog *ngIf ="onEdit" (closeClicked) = "onCloseEditModal()" [isUpdate]='"true"' [inpService]="update"></app-service-dialog>
+<app-grid [pageSize]="10" [columns]="gridColumns" [BaseService]="service" [GridOrder]="defaultOrder" [gridName]="'mngService'" (search)="onSearch($event)"></app-grid>

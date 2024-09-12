@@ -33,6 +33,7 @@ OnInit{
 
   }
   ngOnInit(): void {
+    this.fetchAllCazas();
     this.createForm(this.inpTown);
     console.log(this.isUpdate)
     if(this.isUpdate){
@@ -107,8 +108,8 @@ OnInit{
     })
   }
 }
-fetchAllDepartments(){
-  this.governmentService.getSelectOption().subscribe(data=>{
+fetchAllCazas(){
+  this.cazaService.getSelectOption().subscribe(data=>{
     if(data.success){
       this.cazas =  data.data;
     }

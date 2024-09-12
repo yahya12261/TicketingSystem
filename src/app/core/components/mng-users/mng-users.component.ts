@@ -38,57 +38,6 @@ export class MngUsersComponent {
     this.fetchAllDepartments();
   }
 
-  //   "uuid": "17cadc46-abb9-4415-be14-b30c3f34ce9c",
-  //   "type": "user",
-  //   "id": 103,
-  //   "createdAt": "2024-08-06T17:58:53.173Z",
-  //   "updatedAt": "2024-08-06T17:58:53.000Z",
-  //   "deletedAt": null,
-  //   "version": 2,
-  //   "dsc": null,
-  //   "arabicLabel": null,
-  //   "isActive": true,
-  //   "note": null,
-  //   "first": "sdfdsf",
-  //   "middle": "sdfsda",
-  //   "last": "fsdf",
-  //   "email": "asdasd@adsd.asd",
-  //   "username": "fsdfsdfdsfsdfsdasdf",
-  //   "phoneNumber": "sdf",
-  //   "isAdmin": false,
-  //   "changePassword": true,
-  //   "invalidLoginAttempts": 0,
-  //   "lastLogin": null,
-  //   "createdBy": null,
-  //   "position": {
-  //       "uuid": "8ecc0130-78ec-4763-a79f-176866987204",
-  //       "type": "position",
-  //       "id": 1,
-  //       "createdAt": "2024-07-19T14:27:16.680Z",
-  //       "updatedAt": "2024-07-19T14:27:16.680Z",
-  //       "deletedAt": null,
-  //       "version": 1,
-  //       "dsc": null,
-  //       "arabicLabel": "مسؤول فريق",
-  //       "isActive": true,
-  //       "note": null,
-  //       "name": "PMO"
-  //   }
-  // "department": {
-  //                         "uuid": "28cbc053-897e-4c63-92b4-7ebbf02b5e29",
-  //                         "type": "",
-  //                         "id": 1,
-  //                         "createdAt": "2024-07-13T03:46:44.911Z",
-  //                         "updatedAt": "2024-07-31T00:26:34.000Z",
-  //                         "deletedAt": null,
-  //                         "version": 2,
-  //                         "dsc": null,
-  //                         "arabicLabel": "فريق الدعم التقني",
-  //                         "isActive": true,
-  //                         "note": null,
-  //                         "name": "task force"
-  // },
-
   gridColumns: GridColumn[] = [
     {
       header: 'إجراءات',

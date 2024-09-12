@@ -135,4 +135,69 @@ export class DateUtils {
     const differenceInMilliseconds = today.getTime() - date.getTime();
     return differenceInMilliseconds > 0;
 }
+static getYears(start: number = 1900, end: number = 2024): { id: number; value: number }[] {
+  return Array.from({ length: end - start + 1 }, (_, i) => ({
+      id: i + 1,
+      value: start + i
+  }));
+}
+
+static getMonths(): { id: number; value: string }[] {
+  const monthsInArabic = [
+      "كانون الثاني",  // January
+      "شباط",          // February
+      "آذار",          // March
+      "نيسان",         // April
+      "أيار",          // May
+      "حزيران",        // June
+      "تموز",          // July
+      "آب",            // August
+      "أيلول",         // September
+      "تشرين الأول",   // October
+      "تشرين الثاني",  // November
+      "كانون الأول"    // December
+  ];
+  return monthsInArabic.map((month, index) => ({
+      id: index + 1,
+      value: month
+  }));
+}
+
+static isLeapYear(year: number): boolean {
+  return (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
+}
+
+static getDaysByYearAndMonth(year: number, month: number): { id: number; value: number }[] {
+  const daysInMonths: { [key: number]: number } = {
+      1: 31,  // January
+      2: this.isLeapYear(year) ? 29 : 28,  // February
+      3: 31,  // March
+      4: 30,  // April
+      5: 31,  // May
+      6: 30,  // June
+      7: 31,  // July
+      8: 31,  // August
+      9: 30,  // September
+      10: 31, // October
+      11: 30, // November
+      12: 31  // December
+  };
+  if (month < 1 || month > 12) {
+      return [];
+  }
+  return Array.from({ length: daysInMonths[month] }, (_, i) => ({
+      id: i + 1,
+      value: i + 1
+  }));
+}
+
+static getYearFromDate(date:Date){
+  date.getFullYear();
+}
+static getMonthFromDate(date:Date){
+  date.getMonth();
+}
+static getDayFromDate(date:Date){
+  date.getDay();
+}
 }

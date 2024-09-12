@@ -27,7 +27,7 @@ OnInit{
   governments:IGovernment[] = [{}] as IGovernment[];
   @ViewChildren(CustomInputComponent) customInputs!: QueryList<CustomInputComponent>;
   constructor(private spinner : NgxSpinnerService,private formBuilder: FormBuilder,private cazaService:CazaService,private toast:ToastService,private governmentService:GovernmentService){
-
+this.fetchAllGovernments()
   }
   ngOnInit(): void {
     this.createForm(this.inpCaza);
@@ -86,7 +86,7 @@ OnInit{
       name:this.myForm.value.name,
       arabicLabel: this.myForm.value.arabicName,
       note:this.myForm.value.note,
-      government:this.myForm.value.government
+     government:{id:this.myForm.value.government}
     }
     this.cazaService.create(caza).subscribe(result=>{
       if(result.success){
@@ -103,7 +103,7 @@ OnInit{
     })
   }
 }
-fetchAllDepartments(){
+fetchAllGovernments(){
   this.governmentService.getSelectOption().subscribe(data=>{
     if(data.success){
       this.governments =  data.data;

@@ -1,7 +1,7 @@
 /* styles.scss */
 /* Define a mixin for common styles */
 .sidebar {
-  background-color: rgb(73 100 115);
+  background-color:rgb(73 100 115);
   width: 250px;
   padding: 20px;
   position: fixed;
@@ -11,55 +11,64 @@
   overflow-x: hidden;
   margin-top: 48px;
 }
-.sidebar ul {
-  list-style: none;
-  padding: 0;
-}
-.sidebar li {
-  margin-bottom: 50px;
-
-}
-.sidebar li a {
-  color: #d4d4d4;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  padding: 10px;
-  border-radius: 10px;
-  transition: all 0.3s;
-}
-.sidebar li a .menu-icon {
-  font-size: 24px;
-  margin-right: 10px;
-}
-.sidebar li a:hover {
-  background-color: #f1f1f1;
-  color: #6c6c6c;
-}
-.sidebar li a.active {
-  color: #000000;
-  background-color: #f1f1f1;
-}
-.sub-menu {
-  padding-right: 20px;
-  /* Adjust the value to your desired padding */
-}
 .hideSidebar {
   transform: translateX(100%);
   opacity: 0;
   transition: transform 0.3s, opacity 0.3s;
 }
-/* Define the final state when showing */
 .showSidebar {
   transform: translateX(0);
   opacity: 1;
   transition: transform 0.3s, opacity 0.3s;
+}.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+  text-align: start;
 }
-.menu-text {
-  font-size: larger !important;
+
+.sidebar li {
+  margin-bottom: 10px;
+}
+
+.sidebar a {
+  display: block;
+  color: #ffffff;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+}
+
+.sidebar a:hover {
+  background-color: #007bff;
+}
+
+.sidebar a.active {
+  background-color: #007bff;
+  color: white;
+  transform: translateX(1);
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+.dropdown-menu {
+  display: none;
+  position: static;
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
 }
 
 .dropdown-menu.show {
   display: block;
-  font-size: smaller !important;
+}
+
+.dropdown-menu .dropdown-item {
+  color: #ffffff;
+  padding: 0px 16px 0px 32px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-menu .dropdown-item:hover {
+  background-color: rgba(13, 110, 253, 0.25);
 }

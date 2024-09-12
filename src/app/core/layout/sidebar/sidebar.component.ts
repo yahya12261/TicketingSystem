@@ -14,7 +14,10 @@ export class SidebarComponent {
   isSubmenuOpen = false;
   isDashboardSelected = false;
   dropdownVisible = false;
+  setupDropdown = false;
+  setupActionDropDownVisible = false;
   actionDropDownVisible = false;
+
 
   constructor(private sidebarService: SidebarService ,  private router: Router,private toaster :ToastService) {}
 
@@ -25,6 +28,12 @@ export class SidebarComponent {
   }
   toggleDropdownAction(item: any): void {
     this.actionDropDownVisible = !this.actionDropDownVisible;
+  }
+  setupToggleDropdownAction(item: any): void {
+    this.setupActionDropDownVisible = !this.setupActionDropDownVisible;
+  }
+  setupToggleDropdown(): void {
+    this.setupDropdown = !this.setupDropdown;
   }
   toggleDropdown(): void {
     this.dropdownVisible = !this.dropdownVisible;

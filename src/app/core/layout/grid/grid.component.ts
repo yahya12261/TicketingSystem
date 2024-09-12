@@ -5,6 +5,7 @@ import { InputType } from '../../enums/InputTypes';
 import { ChangeDetectionStrategy } from '@angular/compiler';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastService } from '../../services/ToastService/toast.service';
+import { GridUtils } from '../../helpers/GridUtils';
 @Component({
   selector: 'app-grid',
   templateUrl: './grid.component.html',
@@ -70,6 +71,16 @@ export class GridComponent<T> implements OnInit {
     {  label: 'IS', arabicLabel: 'يعادل' },
     {  label: 'IS_NOT', arabicLabel: 'لا يعادل ' },
     ];
+
+    onChangeSearchList(column:GridColumn){
+      // searchQueryString
+      if(column.isComplicated){
+        this.searchQueryString = GridUtils.filterFieldsFromString(this.searchQueryString,[column.selectQueryName+"",column.selectQueryName+"OP"])
+        this.loadData(this.searchQueryString);
+      }else{
+
+      }
+    }
   getArabicName(label: any): string {
       const option = this.comparisonOptions.find((option) => option.label === label);
       return option ? option.arabicLabel : '';
@@ -98,14 +109,11 @@ export class GridComponent<T> implements OnInit {
         if (!this.searchQuery) {
           this.searchQuery = {};
         }
-
         if (!value || value === undefined|| value ==="null"||value===null) {
           delete this.searchQuery[fieldCustom];
         } else {
           this.searchQuery[fieldCustom] = value;
         }
-
-
         this.currentPage = 1;
         // debugger;
         const searchQueryString = Object.keys(this.searchQuery)

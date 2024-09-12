@@ -1,0 +1,5 @@
+<h1>لائحة الحالات</h1>
+<input type="submit" class="fadeIn fourth" (click)="onOpenAddModal()"   value="إضافة محافظة">
+<app-status-dialog *ngIf ="onAdd" (closeClicked) = "onCloseAddModal()" [isUpdate]='"false"'></app-status-dialog>
+<app-status-dialog *ngIf ="onEdit" (closeClicked) = "onCloseEditModal()" [isUpdate]='"true"' [input]="update"></app-status-dialog>
+<app-grid [pageSize]="10" [columns]="gridColumns" [BaseService]="statusService" [GridOrder]="defaultOrder" [gridName]="'mngStatus'" (search)="onSearch($event)"></app-grid>

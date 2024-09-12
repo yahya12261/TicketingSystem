@@ -32,7 +32,6 @@ export class OptionList{
               {id:"0",arabicLabel:"كلا"}
             ];
 
-
     }
     return [];
   }

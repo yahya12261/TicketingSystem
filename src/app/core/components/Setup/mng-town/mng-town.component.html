@@ -1,1 +1,7 @@
-<p>mng-town works!</p>
+<h1>لائحة البلدات</h1>
+<input type="submit" class="fadeIn fourth" (click)="onOpenAddModal()"   value="إضافة بلدة">
+<app-town-dialog *ngIf ="onAdd" (closeClicked) = "onCloseAddModal()" [isUpdate]='"false"'></app-town-dialog>
+<app-town-dialog *ngIf ="onEdit" (closeClicked) = "onCloseEditModal()" [isUpdate]='"true"' [inpTown]="update"></app-town-dialog>
+<app-grid [pageSize]="10" [columns]="gridColumns" [BaseService]="townService" [GridOrder]="defaultOrder" [gridName]="'mngTown'" (search)="onSearch($event)"></app-grid>
+
+<!--  -->

@@ -105,7 +105,7 @@ export class MngGovernmentComponent {
     this.onEdit = true;}
   }
 
-  onCloseEditDepModal(){
+  onCloseEditModal(){
     this.spinner.hide();
     this.onEdit = false;
   }

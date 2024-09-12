@@ -2,8 +2,11 @@ import { Component } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { InputType } from 'src/app/core/enums/InputTypes';
 import { DateUtils } from 'src/app/core/helpers/DateUtils';
+import { GridUtils } from 'src/app/core/helpers/GridUtils';
 import { GridColumn } from 'src/app/core/Interfaces/GridColumn';
+import { ICaza } from 'src/app/core/Interfaces/Locations/Caza';
 import { IGovernment } from 'src/app/core/Interfaces/Locations/Government';
+import { CazaService } from 'src/app/core/services/Locations/cazaService/caza.service';
 import { GovernmentService } from 'src/app/core/services/Locations/governmentService/government.service';
 
 @Component({
@@ -13,10 +16,10 @@ import { GovernmentService } from 'src/app/core/services/Locations/governmentSer
 })
 export class MngCazaComponent {
   defaultOrder: string = 'orderBy=createdAt&order=DESC';
-  onAddGov = false;
-  onEditGov = false;
+  onAdd = false;
+  onEdit = false;
   up = false;
-  updateGov:IGovernment = {}as IGovernment
+  update:ICaza = {}as ICaza
   gridColumns: GridColumn[] = [
     {
       header: 'إجراءات',
@@ -27,7 +30,7 @@ export class MngCazaComponent {
         return [
           {
             label: 'تعديل',
-            action: () => this.onOpenEditDepModal(value),
+            action: () => this.onOpenEditModal(value),
             visible: (item: any) => {
               return true;
             },
@@ -60,7 +63,7 @@ export class MngCazaComponent {
       searchOperation: 'EQUAL',
     },
     {
-      header: ' اسم الإختصاص',
+      header: ' اسم القضاء',
       visible: true,
       field: 'arabicLabel',
       type: InputType.TEXT,
@@ -68,6 +71,21 @@ export class MngCazaComponent {
       selectQueryName: 'arabicLabel',
       isOrderByField: true,
       searchOperation: 'BEGIN_WITH',
+    },
+    {
+      header: ' اسم القضاء',
+      visible: true,
+      field: 'government',
+      searchListField: (list: any) => {
+        return list.id;
+      },
+      format(value) {
+          return GridUtils.getDataFromObject(value,"arabicLabel");
+      },
+      type: InputType.LIST,
+      searchableField: true,
+      selectQueryName: 'government.id',
+      isOrderByField: false,
     },
     {
       header: 'ملاحظات',
@@ -80,31 +98,42 @@ export class MngCazaComponent {
     },
   ];
   constructor(
-    public governmentService: GovernmentService,
+    private governmentService:GovernmentService,
+    public cazaService:CazaService,
     private spinner: NgxSpinnerService
-  ) {}
+  ) {
+    this.fetchAllGovernments();
+  }
   onSearch(query: string) {}
-  onOpenAddGovModal() {
-    if(!this.onAddGov){
+
+  fetchAllGovernments(){
+    this.governmentService.getSelectOption().subscribe(data=>{
+      if(data.success){
+        this.gridColumns[4].searchList =  data.data;
+      }
+    })
+    }
+  onOpenAddModal() {
+    if(!this.onAdd){
     this.spinner.show();
-    this.onAddGov = true;
+    this.onAdd = true;
     }
   }
-  onCloseAddDepModal(){
+  onCloseAddModal(){
     this.spinner.hide();
-    this.onAddGov = false;
+    this.onAdd = false;
   }
 
-  onOpenEditDepModal(row:IGovernment) {
-    this.updateGov = row;
-    if(!this.onEditGov){
+  onOpenEditModal(row:IGovernment) {
+    this.update = row;
+    if(!this.onEdit){
     this.spinner.show();
     this.up=true;
-    this.onEditGov = true;}
+    this.onEdit = true;}
   }
 
-  onCloseEditDepModal(){
+  onCloseEditModal(){
     this.spinner.hide();
-    this.onEditGov = false;
+    this.onEdit = false;
   }
 }

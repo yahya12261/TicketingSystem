@@ -1,1 +1,5 @@
-<p>mng-caza works!</p>
+<h1>لائحة الأقضية</h1>
+<input type="submit" class="fadeIn fourth" (click)="onOpenAddModal()"   value="إضافة قضاء">
+<app-caza-dialog *ngIf ="onAdd" (closeClicked) = "onCloseAddModal()" [isUpdate]='"false"'></app-caza-dialog>
+<app-caza-dialog *ngIf ="onEdit" (closeClicked) = "onCloseEditModal()" [isUpdate]='"true"' [inpCaza]="update"></app-caza-dialog>
+<app-grid [pageSize]="10" [columns]="gridColumns" [BaseService]="cazaService" [GridOrder]="defaultOrder" [gridName]="'mngCazas'" (search)="onSearch($event)"></app-grid>

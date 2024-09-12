@@ -1,0 +1,40 @@
+<div class="confirmation-dialog-container">
+  <article class="modal-container">
+    <header class="modal-container-header">
+      <h2 class="modal-container-title">
+        {{isUpdate==="true"?"تعديل الحالة":"إضاف حالة"}}
+      </h2>
+    </header>
+    <section class="modal-container-body rtf">
+      <form [formGroup]="myForm" >
+        <div class="container">
+          <div class="row">
+            <div class="col-6">
+            <app-custom-input label="اسم حالة باللغة العربية" formControlName="arabicName" [control]="arabicNameControl" required="true" [dis]="isUpdate==='true'?'true':'false'"></app-custom-input>
+            </div>
+            <div class="col-6">
+              <app-custom-input label="اسم حالة باللغة الإنجليزية" formControlName="name" [control]="nameControl" required="true" [dis]="isUpdate==='true'?'true':'false'"></app-custom-input>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <input type="color" label="لون الحالة" formControlName="color" (change)="onChangeColorPiker($event)" />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <div class="form-group">
+              <label>ملاحظات</label>
+              <textarea class="form-control" formControlName="note"></textarea>
+            </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </section>
+    <footer class="modal-container-footer">
+      <button class="button is-ghost" (click)="onClose()" >إلغاء</button>
+      <button class="button is-primary" (click)="isUpdate=='false'?onSubmit():onUpdate()" > {{isUpdate==="true"?"تعديل":"إضافة"}} </button>
+    </footer>
+  </article>
+</div>

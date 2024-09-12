@@ -1,0 +1,5 @@
+<h1>لائحة انظمة الحالات</h1>
+<input type="submit" class="fadeIn fourth" (click)="onOpenAddModal()"   value="إضافة نظام حالة">
+<app-status-flow-dialog *ngIf ="onAdd" (closeClicked) = "onCloseAddModal()" [isUpdate]='"false"'></app-status-flow-dialog>
+<app-status-flow-dialog *ngIf ="onEdit" (closeClicked) = "onCloseEditModal()" [isUpdate]='"true"' [input]="update"></app-status-flow-dialog>
+<app-grid [pageSize]="10" [columns]="gridColumns" [BaseService]="service" [GridOrder]="defaultOrder" [gridName]="'mngStatusFlow'" (search)="onSearch($event)"></app-grid>

@@ -1,0 +1,187 @@
+<div class="confirmation-dialog-container">
+  <article class="modal-container">
+    <header class="modal-container-header">
+      <h2 class="modal-container-title">
+        {{isUpdate==="true"?"تعديل خدمة":"إضافة خدمة"}}
+      </h2>
+    </header>
+    <section class="modal-container-body rtf">
+      <form [formGroup]="myForm" >
+        <div class="container">
+          <h4>المعلومات الشخصية</h4>
+          <hr>
+          <div class="row">
+            <div class="col-4">
+            <app-custom-input label="الأسم الأول " formControlName="firstAr" [control]="firstArController" required="true" [dis]="isUpdate==='true'?'true':'false'"></app-custom-input>
+            </div>
+            <div class="col-4">
+              <app-custom-input label="اسم الأب " formControlName="middleAr" [control]="middleArController" required="true" [dis]="isUpdate==='true'?'true':'false'"></app-custom-input>
+              </div>
+              <div class="col-4">
+                <app-custom-input label="العائلة " formControlName="lastAr" [control]="lastArController" required="true" [dis]="isUpdate==='true'?'true':'false'"></app-custom-input>
+                </div>
+          </div>
+          <div class="row">
+            <div class="col-4">
+            <app-custom-input label="الأسم الأول باللغة الإنجليزية" formControlName="firstEn" [control]="firstEnController" required="false" [dis]="isUpdate==='true'?'true':'false'"></app-custom-input>
+            </div>
+            <div class="col-4">
+              <app-custom-input label="اسم الأب باللغة الإنجليزية" formControlName="middleEn" [control]="middleEnController" required="false" [dis]="isUpdate==='true'?'true':'false'"></app-custom-input>
+              </div>
+              <div class="col-4">
+                <app-custom-input label="العائلة باللغة الإنجليزية" formControlName="lastEn" [control]="lastEnController" required="false" [dis]="isUpdate==='true'?'true':'false'"></app-custom-input>
+                </div>
+          </div>
+          <div class="row">
+            <div style="border: 1px;">
+              <label>تاريخ الولادة</label>
+              <div class="col-1">
+              <app-custom-select
+              [label]="'السنة'"
+              [control]="yearControl"
+              [required]="true"
+              [errorMessage]="'حقل إجباري'"
+              [placeholder]="''"
+              [options]="yearsOptions"
+              [labelValue]="'value'"
+              [value]="'id'"
+            ></app-custom-select>
+          </div>
+          <div class="col-1">
+              <app-custom-select
+              [label]="'الشهر'"
+              [control]="monthsControl"
+              [required]="true"
+              [errorMessage]="'حقل إجباري'"
+              [placeholder]="''"
+              [options]="monthsOptions"
+              [labelValue]="'value'"
+              [value]="'id'"
+            ></app-custom-select>
+          </div>
+          <div class="col-2">
+            <app-custom-select
+              [label]="'اليوم'"
+              [control]="dayControl"
+              [required]="true"
+              [errorMessage]="'حقل إجباري'"
+              [placeholder]="''"
+              [options]="dayOptions"
+              [labelValue]="'value'"
+              [value]="'id'"
+          ></app-custom-select>
+        </div>
+      </div>
+      <div class="col-2">
+        <app-custom-select
+          [label]="'الجنس'"
+          [control]="genderControl"
+          [required]="true"
+          [errorMessage]="'حقل إجباري'"
+          [placeholder]="''"
+          [options]="genderOptions"
+          [labelValue]="'value'"
+          [value]="'id'"
+      ></app-custom-select>
+    </div>
+    <div class="col-6">
+      <app-custom-input label="رقم البطاقة" formControlName="LID" [control]="LIDController" required="false" [dis]="isUpdate==='true'?'true':'false'"></app-custom-input>
+      </div>
+          </div>
+          <div class="row">
+            <div class="col-3">
+              <app-custom-select
+              [label]="'الجنسية'"
+              [control]="nationalityControl"
+              [required]="true"
+              [errorMessage]="'حقل إجباري'"
+              [placeholder]="''"
+              [options]="nationalityOptions"
+              [labelValue]="'value'"
+              [value]="'id'"
+          ></app-custom-select>
+            </div>
+            <div class="col-3">
+              <app-custom-select
+              [label]="'المحافظة'"
+              [control]="governmentAddressControl"
+              [required]="true"
+              [errorMessage]="'حقل إجباري'"
+              [placeholder]="''"
+              [options]="governmentAddressOptions"
+              [labelValue]="'value'"
+              [value]="'id'"
+          ></app-custom-select>
+            </div>
+            <div class="col-3">
+              <app-custom-select
+              [label]="'القضاء'"
+              [control]="cazaAddressControl"
+              [required]="true"
+              [errorMessage]="'حقل إجباري'"
+              [placeholder]="''"
+              [options]="cazaAddressOptions"
+              [labelValue]="'value'"
+              [value]="'id'"
+          ></app-custom-select>
+            </div>
+            <div class="col-3">
+              <app-custom-select
+              [label]="'البلدة'"
+              [control]="townAddressControl"
+              [required]="true"
+              [errorMessage]="'حقل إجباري'"
+              [placeholder]="''"
+              [options]="townAddressOptions"
+              [labelValue]="'value'"
+              [value]="'id'"
+          ></app-custom-select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-4">
+                <app-custom-input label="الخلوي" formControlName="phoneNumber" [control]="phoneNumberController" required="true" [dis]="isUpdate==='true'?'true':'false'"></app-custom-input>
+            </div>
+            <div class="col-1">
+              <div class="formGroup">
+                <label class="form-control">لديه ضمان</label>
+                <input type="checkbox" formControlName="haveInsurance">
+              </div>
+            </div>
+            <div class="col-3">
+              <app-custom-select
+              [label]="'الجهة الضامنة'"
+              [control]="insuranceNameControl"
+              [required]="true"
+              [errorMessage]="'حقل إجباري'"
+              [placeholder]="''"
+              [options]="insuranceNameOptions"
+              [labelValue]="'value'"
+              [value]="'id'"
+          ></app-custom-select>
+            </div>
+            <div class="col-1">
+            <div class="formGroup">
+              <label class="form-control">من الطاقم الطبي؟</label>
+              <input type="checkbox" formControlName="fromMedical">
+            </div>
+          </div>
+
+        </div>
+          <div class="row">
+            <div class="col-12">
+              <div class="form-group">
+              <label>ملاحظات</label>
+              <textarea class="form-control" formControlName="note"></textarea>
+            </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </section>
+    <footer class="modal-container-footer">
+      <button class="button is-ghost" (click)="onClose()" >إلغاء</button>
+      <button class="button is-primary" (click)="isUpdate=='false'?onSubmit():onUpdate()" > {{isUpdate==="true"?"تعديل":"إضافة"}} </button>
+    </footer>
+  </article>
+</div>

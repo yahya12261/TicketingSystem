@@ -14,8 +14,7 @@ import { GridComponent } from './layout/grid/grid.component';
 import { BaseService } from './services/BaseService/base.service';
 import { ToastrModule } from 'ngx-toastr';
 import { DatePipe } from '@angular/common';
-
-import {Ng2TelInputModule} from 'ng2-tel-input';
+import { Ng2TelInputModule} from 'ng2-tel-input';
 import { AdminComponent } from './components/admin/admin.component';
 import { MngDepartmentComponent } from './components/mng-department/mng-department.component';
 import { DepartmentService } from './services/departmentService/department.service';
@@ -37,9 +36,19 @@ import { DateFormatDirective } from './directive/date.directive';
 import { MngGovernmentComponent } from './components/Setup/mng-government/mng-government.component';
 import { MngCazaComponent } from './components/Setup/mng-caza/mng-caza.component';
 import { MngTownComponent } from './components/Setup/mng-town/mng-town.component';
-import { GovernmentDialogComponent } from './modals/government-dialog/government-dialog.component';
 import { CazaDialogComponent } from './modals/Setup/caza-dialog/caza-dialog.component';
 import { TownDialogComponent } from './modals/Setup/town-dialog/town-dialog.component';
+import { GovernmentDialogComponent } from './modals/Setup/government-dialog/government-dialog.component';
+import { StatusDialogComponent } from './modals/Setup/status-dialog/status-dialog.component';
+import { MngStatusComponent } from './components/Setup/mng-status/mng-status.component';
+import { MngServiceComponent } from './components/mng-service/mng-service.component';
+import { ServiceDialogComponent } from './modals/service-dialog/service-dialog.component';
+import { MngStatusFlowComponent } from './components/Setup/mng-status-flow/mng-status-flow.component';
+import { StatusFlowDialogComponent } from './modals/Setup/status-flow-dialog/status-flow-dialog.component';
+import { CustomMultiSelectComponent } from './layout/custom-multi-select/custom-multi-select.component';
+import { MngPersonComponent } from './components/mng-person/mng-person.component';
+import { PersonDialogComponent } from './modals/person-dialog/person-dialog.component';
+
 @NgModule({
   declarations: [
     CoreComponent,
@@ -71,6 +80,16 @@ import { TownDialogComponent } from './modals/Setup/town-dialog/town-dialog.comp
     GovernmentDialogComponent,
     CazaDialogComponent,
     TownDialogComponent,
+    StatusDialogComponent,
+    MngStatusComponent,
+    MngServiceComponent,
+    ServiceDialogComponent,
+    MngStatusFlowComponent,
+    StatusFlowDialogComponent,
+    CustomMultiSelectComponent,
+    MngPersonComponent,
+    PersonDialogComponent,
+
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

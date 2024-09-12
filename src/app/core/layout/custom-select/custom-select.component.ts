@@ -5,9 +5,10 @@ import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/f
 @Component({
   selector: 'app-custom-select',
   template: `
-    <div class="form-group">
+    <div class="form-group" >
       <label [for]="id" [class.is-required]="required">{{ label }}</label>
       <select
+       [formControl]="control"
         class="form-control"
         [required]="required"
         [disabled]="disabled"
@@ -62,7 +63,7 @@ export class CustomSelectComponent implements ControlValueAccessor, OnInit {
   @Input() label!: string;
   @Input() control!: FormControl;
   @Input() required: boolean = false;
-  @Input() disabled!:string;
+  @Input() disabled!:boolean;
   @Input() errorMessage: string = 'Invalid selection';
   @Input() placeholder!: string ;
   @Input() options: any = [];
@@ -90,6 +91,7 @@ export class CustomSelectComponent implements ControlValueAccessor, OnInit {
 
   writeValue(value: any): void {
     this._value = value;
+    this.control.setValue(value);
   }
 
   registerOnChange(fn: any): void {

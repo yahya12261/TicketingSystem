@@ -18,4 +18,5 @@ export interface GridColumn {
   selectQueryName?: string;
   searchOperation?:string;
   isOrderByField:boolean;
+  isComplicated?:boolean;
 }
