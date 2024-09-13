@@ -1,5 +1,5 @@
 <h1>لائحة المواطنين</h1>
 <input type="submit" class="fadeIn fourth" (click)="onOpenAddModal()"   value="إضافة مواطن">
-<!-- <app-service-dialog *ngIf ="onAdd" (closeClicked) = "onCloseAddModal()" [isUpdate]='"false"'></app-service-dialog>
-<app-service-dialog *ngIf ="onEdit" (closeClicked) = "onCloseEditModal()" [isUpdate]='"true"' [inpService]="update"></app-service-dialog> -->
+<app-person-dialog *ngIf ="onAdd" (closeClicked) = "onCloseAddModal()" [isUpdate]='"false"'></app-person-dialog>
+<app-person-dialog *ngIf ="onEdit" (closeClicked) = "onCloseEditModal()" [isUpdate]='"true"' [inpPerson]="update"></app-person-dialog>
 <app-grid [pageSize]="10" [columns]="gridColumns" [BaseService]="service" [GridOrder]="defaultOrder" [gridName]="'mngPerson'" (search)="onSearch($event)"></app-grid>

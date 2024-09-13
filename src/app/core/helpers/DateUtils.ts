@@ -1,3 +1,4 @@
+import { searchList } from "../Interfaces/SearchList";
 
 export class DateUtils {
   static formatDateTime(value: any): string {
@@ -135,14 +136,13 @@ export class DateUtils {
     const differenceInMilliseconds = today.getTime() - date.getTime();
     return differenceInMilliseconds > 0;
 }
-static getYears(start: number = 1900, end: number = 2024): { id: number; value: number }[] {
+static getYears(start: number = 1900, end: number = 2024) {
   return Array.from({ length: end - start + 1 }, (_, i) => ({
-      id: i + 1,
-      value: start + i
+      arabicLabel: (end - i).toString() // Convert year to string
   }));
 }
 
-static getMonths(): { id: number; value: string }[] {
+static getMonths() {
   const monthsInArabic = [
       "كانون الثاني",  // January
       "شباط",          // February
@@ -159,15 +159,14 @@ static getMonths(): { id: number; value: string }[] {
   ];
   return monthsInArabic.map((month, index) => ({
       id: index + 1,
-      value: month
+      arabicLabel: month
   }));
 }
-
 static isLeapYear(year: number): boolean {
   return (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
 }
 
-static getDaysByYearAndMonth(year: number, month: number): { id: number; value: number }[] {
+static getDaysByYearAndMonth(year: number, month: number){
   const daysInMonths: { [key: number]: number } = {
       1: 31,  // January
       2: this.isLeapYear(year) ? 29 : 28,  // February

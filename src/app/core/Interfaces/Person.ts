@@ -6,24 +6,24 @@ import { IGovernment } from "./Locations/Government"
 
 
 export interface IPerson extends BaseInterface {
-     firstAr: string
-     middleAr: string
-     lastAr: string
-     firstEn: string
-     middleEn: string
-     lastEn: string
-     dob: Date
-     Gender: Gender
-     LID: string
-     nationality: Nationality
-     governmentAddress: IGovernment
-     cazaAddress: ICaza
-     townAddress: string
-     phoneNumber : string;
-     phoneNumberCode:string;
-     fromMedical:boolean
-     haveInsurance:boolean
-     insuranceName:string
+     firstAr?: string
+     middleAr?: string
+     lastAr?: string
+     firstEn?: string
+     middleEn?: string
+     lastEn?: string
+     dob?: Date
+     Gender?: Gender
+     LID?: string
+     nationality?: Nationality
+     governmentAddress?: IGovernment
+     cazaAddress?: ICaza
+     townAddress?: string
+     phoneNumber ?: string;
+     phoneNumberCode?:string;
+     fromMedical?:boolean
+     haveInsurance?:boolean
+     insuranceName?:string
   }
 
   export enum IPersonFields {

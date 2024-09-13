@@ -136,8 +136,10 @@ OnInit{
       this.statusService.getSelectOption().subscribe(data=>{
         if(data.success){
           this.allStatuses =  data.data;
+          console.log(this.allStatuses)
         }
       })
+
     }
     //fetchAllServices
     fetchAllServices(){

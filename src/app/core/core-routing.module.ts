@@ -14,6 +14,7 @@ import { MngTownComponent } from './components/Setup/mng-town/mng-town.component
 import { MngStatusComponent } from './components/Setup/mng-status/mng-status.component';
 import { MngServiceComponent } from './components/mng-service/mng-service.component';
 import { MngStatusFlowComponent } from './components/Setup/mng-status-flow/mng-status-flow.component';
+import { MngPersonComponent } from './components/mng-person/mng-person.component';
 
 const routes: Routes = [
   {
@@ -33,6 +34,7 @@ const routes: Routes = [
       { path: 'setup/status', component:MngStatusComponent },
       { path: 'setup/service', component:MngServiceComponent },
       { path: 'setup/status-flow', component:MngStatusFlowComponent },
+      { path: 'person', component:MngPersonComponent },
       { path: '**', redirectTo: 'home' },
     ],
   },

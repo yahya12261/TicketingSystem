@@ -27,6 +27,7 @@ import { AbstractControl, ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR }
     `
       .is-invalid {
         border: 1px solid red;
+        
       }
       .is-required::after{
          content: "*";
@@ -35,6 +36,7 @@ import { AbstractControl, ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR }
 }
       .is-valid {
         border: 1px solid green;
+
       }
       .invalid-feedback {
         color: red;
@@ -44,6 +46,7 @@ import { AbstractControl, ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR }
         cursor: not-allowed;
         background-color: #f2f2f2;
       }
+
     `
   ],
   providers: [

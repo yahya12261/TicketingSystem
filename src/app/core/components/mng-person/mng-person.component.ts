@@ -5,6 +5,10 @@ import { DateUtils } from '../../helpers/DateUtils';
 import { GridColumn } from '../../Interfaces/GridColumn';
 import { PersonService } from '../../services/personService/person.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { GridUtils } from '../../helpers/GridUtils';
+import { OptionList } from '../../helpers/OptionList';
+import { getNationalitiesArray, Nationality } from '../../helpers/Nationality';
+import { getNationalityInArabic } from '../../enums/Nationality';
 
 @Component({
   selector: 'app-mng-person',
@@ -46,7 +50,7 @@ export class MngPersonComponent {
       },
       searchableField: true,
       selectQueryName: 'createdAt',
-      isOrderByField: true,
+      isOrderByField: false,
       searchOperation: 'EQUAL',
     },
     {
@@ -56,7 +60,7 @@ export class MngPersonComponent {
       type: InputType.TEXT,
       searchableField: true,
       selectQueryName: 'id',
-      isOrderByField: true,
+      isOrderByField: false,
       searchOperation: 'EQUAL',
     },
     {
@@ -66,57 +70,57 @@ export class MngPersonComponent {
       type: InputType.TEXT,
       searchableField: true,
       selectQueryName: "firstAr",
-      isOrderByField: true,
+      isOrderByField: false,
       searchOperation: "BEGIN_WITH"
     },
     {
-      header: "الأسم الأوسط",
+      header: "اسم الأب",
       visible: true,
       field: "middleAr",
       type: InputType.TEXT,
       searchableField: true,
       selectQueryName: "middleAr",
-      isOrderByField: true,
+      isOrderByField: false,
       searchOperation: "BEGIN_WITH"
     },
     {
-      header: "الأسم الأخير",
+      header: "الشهرة",
       visible: true,
       field: "lastAr",
       type: InputType.TEXT,
       searchableField: true,
       selectQueryName: "lastAr",
-      isOrderByField: true,
+      isOrderByField: false,
       searchOperation: "BEGIN_WITH"
     },
     {
       header: "First Name",
-      visible: true,
+      visible: false,
       field: "firstEn",
       type: InputType.TEXT,
       searchableField: true,
       selectQueryName: "firstEn",
-      isOrderByField: true,
+      isOrderByField: false,
       searchOperation: "BEGIN_WITH"
     },
     {
       header: "Middle Name",
-      visible: true,
+      visible: false,
       field: "middleEn",
       type: InputType.TEXT,
       searchableField: true,
       selectQueryName: "middleEn",
-      isOrderByField: true,
+      isOrderByField: false,
       searchOperation: "BEGIN_WITH"
     },
     {
       header: "Last Name",
-      visible: true,
+      visible: false,
       field: "lastEn",
       type: InputType.TEXT,
       searchableField: true,
       selectQueryName: "lastEn",
-      isOrderByField: true,
+      isOrderByField: false,
       searchOperation: "BEGIN_WITH"
     },
     {
@@ -126,25 +130,36 @@ export class MngPersonComponent {
       type: InputType.DATE,
       searchableField: false,
       selectQueryName: "dob",
-      isOrderByField: true
+      format(value) {
+        return DateUtils.formatDate(value);
+    },
+      isOrderByField: false
     },
     {
       header: "الجنس",
       visible: true,
-      field: "gender",
+      field: "Gender",
       type: InputType.LIST,
       searchableField: true,
-      selectQueryName: "gender",
-      isOrderByField: true
+      selectQueryName: "Gender",
+      isOrderByField: false,
+      searchOperation:"BEGIN_WITH",
+      searchListField: (list: any) => {
+        return list.value;
+      },
+      format(value) {
+          return value=='male'?"ذكر":"انثى";
+      },
+      searchList:OptionList.getListByName('gender')
     },
     {
       header: "رقم البطاقة",
-      visible: true,
+      visible: false,
       field: "LID",
       type: InputType.TEXT,
       searchableField: true,
       selectQueryName: "LID",
-      isOrderByField: true
+      isOrderByField: false
     },
     {
       header: "الجنسية",
@@ -153,25 +168,48 @@ export class MngPersonComponent {
       type: InputType.LIST,
       searchableField: true,
       selectQueryName: "nationality",
-      isOrderByField: true
+      isOrderByField: false,
+
+      searchListField: (list: any) => {
+        return list.value;
+      },
+      format(value) {
+          return getNationalityInArabic(value)
+      },
+      searchList:getNationalitiesArray(),
+      searchOperation:"EQUAL",
     },
     {
       header: "المحافظة",
       visible: true,
       field: "governmentAddress",
-      type: InputType.TEXT,
+      type: InputType.LIST,
       searchableField: true,
-      selectQueryName: "governmentAddress",
-      isOrderByField: true
+      selectQueryName: "governmentAddress.id",
+      isOrderByField: false,
+      searchListField: (list: any) => {
+        return list.id;
+      },
+      format(value) {
+        return GridUtils.getDataFromObject(value,"arabicLabel");
+      },
+      searchOperation:"EQUAL",
     },
     {
       header: "القضاء",
       visible: true,
       field: "cazaAddress",
-      type: InputType.TEXT,
+      type: InputType.LIST,
       searchableField: true,
       selectQueryName: "cazaAddress",
-      isOrderByField: true
+      isOrderByField: false,
+      searchListField: (list: any) => {
+        return list.id;
+      },
+      format(value) {
+        return GridUtils.getDataFromObject(value,"arabicLabel");
+      },
+      searchOperation:"EQUAL",
     },
     {
       header: "البلدة",
@@ -180,7 +218,7 @@ export class MngPersonComponent {
       type: InputType.TEXT,
       searchableField: true,
       selectQueryName: "townAddress",
-      isOrderByField: true
+      isOrderByField: false
     },
     {
       header: "رقم الهاتف",
@@ -189,16 +227,16 @@ export class MngPersonComponent {
       type: InputType.TEXT,
       searchableField: true,
       selectQueryName: "phoneNumber",
-      isOrderByField: true
+      isOrderByField: false
     },
     {
       header: "رمز الدولة",
-      visible: true,
+      visible: false,
       field: "phoneNumberCode",
       type: InputType.TEXT,
       searchableField: true,
       selectQueryName: "phoneNumberCode",
-      isOrderByField: true
+      isOrderByField: false
     },
     {
       header: "من الطاقم الطبي",
@@ -207,7 +245,10 @@ export class MngPersonComponent {
       type: InputType.TEXT,
       searchableField: false,
       selectQueryName: "fromMedical",
-      isOrderByField:false
+      isOrderByField:false,
+      format(value) {
+        return value?"نعم":"كلا";
+      },
     },
     {
       header: "لديه جهة ضامنة",
@@ -216,7 +257,10 @@ export class MngPersonComponent {
       type: InputType.TEXT,
       searchableField: false,
       selectQueryName: "haveInsurance",
-      isOrderByField:false
+      isOrderByField:false,
+      format(value) {
+        return value?"نعم":"كلا";
+      },
     },
     {
       header: "اسم الجهة الضامنة",
@@ -225,11 +269,11 @@ export class MngPersonComponent {
       type: InputType.TEXT,
       searchableField: true,
       selectQueryName: "insuranceName",
-      isOrderByField: true
+      isOrderByField: false
     },
     {
       header: 'ملاحظات',
-      visible: true,
+      visible: false,
       field: 'note',
       type: InputType.TEXT,
       searchableField: false,
