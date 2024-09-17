@@ -68,6 +68,7 @@ export abstract class BaseService<T> {
     const headers = this.getHeaders();
     return this.http.get<T>(url, { headers });
   }
+  
   private generateBoundary(): string {
     const boundary = '----------' + Math.random().toString().substr(2, 25);
     return boundary;

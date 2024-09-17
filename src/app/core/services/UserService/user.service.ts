@@ -23,7 +23,6 @@ export class UserService extends BaseService<IUser>{
       })
     );
   }
-
   activateDeactivate(uuid:string):Observable<{data:string,message:string,success:boolean}>{
     const headers = this.getHeaders();
     return this.http.patch<any>(this.apiUrl+"/activate-deactivate", {uuid:uuid}, { headers }).pipe(
@@ -57,5 +56,9 @@ export class UserService extends BaseService<IUser>{
           });
       })
     );
+  }
+  getOneByUUID(uuid:string): Observable<{data:IUser,message:string,success:boolean}>{
+    const headers = this.getHeaders();
+    return this.http.get<{ data:any, success:boolean,message:string, }>(this.apiUrl + "/" + uuid ,{headers});
   }
 }

@@ -1,5 +1,8 @@
 <h1>لائحة المواطنين</h1>
 <input type="submit" class="fadeIn fourth" (click)="onOpenAddModal()"   value="إضافة مواطن">
-<app-person-dialog *ngIf ="onAdd" (closeClicked) = "onCloseAddModal()" [isUpdate]='"false"'></app-person-dialog>
+<input type="submit" class="fadeIn fourth" (click)="onOpenFastService()"   value="إضافة خدمة سريعة">
+<app-person-dialog *ngIf ="onAdd" (closeClicked) = "onCloseAddModal()"  [isUpdate]='"false"'></app-person-dialog>
+<app-person-operation *ngIf ="onAddOldPerson" (closeClicked) = "onCloseOldPersonModal()" [inpPerson]="update" [isFast]='"false"'></app-person-operation>
+<app-person-operation *ngIf ="onAddFast" (closeClicked) = "onCloseFastModal()" [isFast]='"true"'></app-person-operation>
 <app-person-dialog *ngIf ="onEdit" (closeClicked) = "onCloseEditModal()" [isUpdate]='"true"' [inpPerson]="update"></app-person-dialog>
 <app-grid [pageSize]="10" [columns]="gridColumns" [BaseService]="service" [GridOrder]="defaultOrder" [gridName]="'mngPerson'" (search)="onSearch($event)"></app-grid>

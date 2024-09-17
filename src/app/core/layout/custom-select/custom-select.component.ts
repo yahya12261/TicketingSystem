@@ -89,7 +89,10 @@ export class CustomSelectComponent implements ControlValueAccessor, OnInit {
   onBlur() {
     this.invalid = this.control?.invalid || false;
     this.valid = !this.invalid;
-    this.onTouched();
+    if(this.onTouched){
+      this.onTouched();
+    }
+
   }
 
   writeValue(value: any): void {

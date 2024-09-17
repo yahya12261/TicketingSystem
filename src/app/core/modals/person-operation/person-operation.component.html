@@ -1,0 +1,243 @@
+<div class="confirmation-dialog-container">
+  <article class="modal-container">
+    <header class="modal-container-header">
+      <h2 class="modal-container-title">
+      {{"إضافة خدمة"}}
+        <!-- {{isUpdate==="true"?"تعديل خدمة":"إضافة خدمة"}} -->
+      </h2>
+    </header>
+    <section class="modal-container-body rtf">
+      <form [formGroup]="myForm" >
+        <div class="container" *ngIf="isFast==='true'">
+          <h4>المعلومات الشخصية</h4>
+          <hr>
+          <h6>الأسم باللغة العربية</h6>
+
+          <div class="row">
+            <div class="col-4">
+            <app-custom-input label="الأسم الأول " formControlName="firstAr" [control]="firstArController" required="true" [dis]="'false'"></app-custom-input>
+            </div>
+            <div class="col-4">
+              <app-custom-input label="اسم الأب " formControlName="middleAr" [control]="middleArController" required="true" [dis]="'false'"></app-custom-input>
+              </div>
+              <div class="col-4">
+                <app-custom-input label="العائلة " formControlName="lastAr" [control]="lastArController" required="true" [dis]="'false'"></app-custom-input>
+                </div>
+          </div>
+          <hr>
+          <h6>الأسم باللغة الإنجليزية</h6>
+          <div class="row">
+            <div class="col-4">
+            <app-custom-input label="الأسم الأول" formControlName="firstEn" [control]="firstEnController" required="false" [dis]="'false'"></app-custom-input>
+            </div>
+            <div class="col-4">
+              <app-custom-input label="اسم الأب" formControlName="middleEn" [control]="middleEnController" required="false" [dis]="'false'"></app-custom-input>
+              </div>
+              <div class="col-4">
+                <app-custom-input label="العائلة" formControlName="lastEn" [control]="lastEnController" required="false" [dis]="'false'"></app-custom-input>
+                </div>
+          </div>
+          <div class="row">
+              <label>تاريخ الولادة</label>
+              <div class="col-3">
+              <app-custom-select
+                [label]="'السنة'"
+                [control]="yearControl"
+                [required]="true"
+                [errorMessage]="'حقل إجباري'"
+                [options]="yearsOptions"
+                [labelValue]="'arabicLabel'"
+                [value]="'arabicLabel'"
+                [isFetchedData] = "false"
+                (change)="onYearChange()"
+            ></app-custom-select>
+          </div>
+          <div class="col-3">
+              <app-custom-select
+              [label]="'الشهر'"
+              [control]="monthsControl"
+              [required]="true"
+              [errorMessage]="'حقل إجباري'"
+              [placeholder]="''"
+              [options]="monthsOptions"
+              [labelValue]="'arabicLabel'"
+              [value]="'id'"
+              [isFetchedData] = "false"
+               (change)="onMonthChange()"
+            ></app-custom-select>
+          </div>
+          <div class="col-2">
+            <app-custom-select
+              [label]="'اليوم'"
+              [control]="dayControl"
+              [required]="true"
+              [errorMessage]="'حقل إجباري'"
+              [placeholder]="''"
+              [options]="dayOptions"
+              [isFetchedData] = "false"
+              [labelValue]="'value'"
+              [value]="'id'"
+          ></app-custom-select>
+      </div>
+      <div class="col-4">
+        <app-custom-select
+          [label]="'الجنس'"
+          [control]="genderControl"
+          [required]="true"
+          [errorMessage]="'حقل إجباري'"
+          [placeholder]="''"
+          [options]="genderOptions"
+          [isFetchedData] = "false"
+          [labelValue]="'arabicLabel'"
+          [value]="'value'"
+      ></app-custom-select>
+    </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <app-custom-input label="رقم البطاقة" formControlName="LID" [control]="LIDController" required="false" [dis]="'false'"></app-custom-input>
+              </div>
+            <div class="col-6">
+              <app-custom-select
+              [label]="'الجنسية'"
+              [control]="nationalityControl"
+              [required]="true"
+              [errorMessage]="'حقل إجباري'"
+              [placeholder]="''"
+              [isFetchedData] = "false"
+              [options]="nationalityOptions"
+              [labelValue]="'arabicLabel'"
+              [value]="'value'"
+          ></app-custom-select>
+            </div>
+
+          </div>
+          <br>
+          <h4>عنوان السكن</h4>
+          <hr>
+          <div class="row">
+            <div class="col-4">
+              <app-custom-select
+              [label]="'المحافظة'"
+              [control]="governmentAddressControl"
+              [required]="true"
+              [errorMessage]="'حقل إجباري'"
+              [placeholder]="''"
+              [options]="governmentAddressOptions"
+              [isFetchedData] = "true"
+              [labelValue]="'arabicLabel'"
+              [value]="'id'"
+              (change)="onGovChange()"
+
+          ></app-custom-select>
+            </div>
+            <div class="col-4">
+              <app-custom-select
+              [label]="'القضاء'"
+              [control]="cazaAddressControl"
+              [required]="true"
+              [errorMessage]="'حقل إجباري'"
+              [placeholder]="''"
+              [options]="cazaAddressOptions"
+              [labelValue]="'arabicLabel'"
+              [value]="'id'"
+              (change)="onCazaChange()"
+
+          ></app-custom-select>
+            </div>
+            <div class="col-4">
+              <app-custom-select
+              [label]="'البلدة'"
+              [control]="townAddressControl"
+              [required]="true"
+              [errorMessage]="'حقل إجباري'"
+              [placeholder]="''"
+              [options]="townAddressOptions"
+              [labelValue]="'arabicLabel'"
+              [value]="'arabicLabel'"
+          ></app-custom-select>
+            </div>
+          </div>
+          <br>
+          <h4>معلومات اخرى</h4>
+          <hr>
+          <div class="row">
+            <div class="col-4">
+                <app-custom-input type="number" label="الخلوي" formControlName="phoneNumber" [control]="phoneNumberController" required="true" [dis]="'false'"
+                minlength="8" maxlength="8" required></app-custom-input>
+            </div>
+            <div class="col-3">
+              <div class="formGroup">
+                <label>لديه ضمان</label>
+                <input type="checkbox" formControlName="haveInsurance" [formControl]="haveInsuranceControl">
+              </div>
+            </div>
+            <div class="col-3" *ngIf="haveInsuranceControl.value">
+              <app-custom-select
+              [label]="'الجهة الضامنة'"
+              [control]="insuranceNameControl"
+              [required]="false"
+              [errorMessage]="'حقل إجباري'"
+              [placeholder]="''"
+              [options]="insuranceNameOptions"
+              [labelValue]="'value'"
+              [value]="'id'"
+          ></app-custom-select>
+            </div>
+            <div class="col-2">
+            <div class="formGroup">
+              <label >من الطاقم الطبي؟</label>
+              <input type="checkbox" formControlName="fromMedical" [formControl]="fromMedicalControl">
+            </div>
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <app-custom-select
+            [label]="'الخدمة'"
+            [control]="serviceControl"
+            [required]="true"
+            [errorMessage]="'حقل إجباري'"
+            [placeholder]="''"
+            [options]="serviceOptions"
+            [labelValue]="'arabicLabel'"
+            [value]="'id'"
+            (change)="onServiceChange()"
+        ></app-custom-select>
+          </div>
+        </div>
+          <div class="row">
+            <div class="col-12">
+              <div class="form-group">
+              <label>ملاحظات</label>
+              <textarea class="form-control" formControlName="note"></textarea>
+            </div>
+            </div>
+          </div>
+        </div>
+        <div class="container" *ngIf="isFast==='false'">
+          <div class="row">
+            <div class="col-12">
+              <app-custom-select
+              [label]="'الخدمة'"
+              [control]="serviceControl"
+              [required]="true"
+              [errorMessage]="'حقل إجباري'"
+              [placeholder]="''"
+              [options]="serviceOptions"
+              [labelValue]="'arabicLabel'"
+              [value]="'id'"
+              (change)="onServiceChange()"
+          ></app-custom-select>
+            </div>
+          </div>
+        </div>
+      </form>
+    </section>
+    <footer class="modal-container-footer">
+      <button class="button is-ghost" (click)="onClose()" >إلغاء</button>
+      <button class="button is-primary" (click)="onSubmit()" > إضافة </button>
+    </footer>
+  </article>
+</div>

@@ -1,0 +1,10 @@
+<h1>لائحة المواطنين</h1>
+<input type="submit" class="fadeIn fourth" (click)="onOpenFastService()"   value="إضافة خدمة سريعة">
+<app-person-operation *ngIf ="onAddFast" (closeClicked) = "onCloseFastService()" [isFast]='"true"'></app-person-operation>
+<app-change-status-dialog *ngIf ="onChangeStatus" (closeClicked) = "onCloseChangeStatus()" [operation]='personOperation'></app-change-status-dialog>
+<app-person-operation *ngIf ="onAddOld" (closeClicked) = "onCloseOldService()" [inpPerson]="person" [isFast]='"false"'></app-person-operation>
+<!-- <app-person-dialog *ngIf ="onAdd" (closeClicked) = "onCloseAddModal()"  [isUpdate]='"false"'></app-person-dialog>
+
+
+<app-person-dialog *ngIf ="onEdit" (closeClicked) = "onCloseEditModal()" [isUpdate]='"true"' [inpPerson]="update"></app-person-dialog> -->
+<app-grid [pageSize]="10" [columns]="gridColumns" [BaseService]="service" [GridOrder]="defaultOrder" [gridName]="'mngOperationPerson'" (search)="onSearch($event)"></app-grid>

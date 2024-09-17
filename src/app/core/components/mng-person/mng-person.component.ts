@@ -18,6 +18,8 @@ import { getNationalityInArabic } from '../../enums/Nationality';
 export class MngPersonComponent {
   defaultOrder: string = 'orderBy=createdAt&order=DESC';
   onAdd = false;
+  onAddFast = false;
+  onAddOldPerson = false;
   onEdit = false;
   up = false;
   update:IPerson = {} as IPerson
@@ -32,6 +34,13 @@ export class MngPersonComponent {
           {
             label: 'تعديل',
             action: () => this.onOpenEditModal(value),
+            visible: (item: any) => {
+              return true;
+            },
+          },
+          {
+            label: 'إضافة خدمة',
+            action: () => this.onOpenAddService(value),
             visible: (item: any) => {
               return true;
             },
@@ -305,10 +314,35 @@ export class MngPersonComponent {
     this.up=true;
     this.onEdit = true;}
   }
+  onOpenFastService(){
+    if(!this.onAddFast){
+      // this.spinner.show();
+      this.onAddFast = true;
+      this.onAdd = false;
+      }
+  }
+
+  onOpenAddService(row:IPerson){
+    this.update = row;
+      // this.spinner.show();
+      this.onAddOldPerson = true;
+      this.onAddFast = false;
+      this.onAdd = false;
+
+  }
 
   onCloseEditModal(){
     this.spinner.hide();
     this.onEdit = false;
+  }
+  onCloseFastModal(){
+    this.spinner.hide();
+    this.onAddFast = false;
+  }
+
+  onCloseOldPersonModal(){
+    this.spinner.hide();
+    this.onAddOldPerson = false;
   }
 }
 

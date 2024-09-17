@@ -48,6 +48,9 @@ import { StatusFlowDialogComponent } from './modals/Setup/status-flow-dialog/sta
 import { CustomMultiSelectComponent } from './layout/custom-multi-select/custom-multi-select.component';
 import { MngPersonComponent } from './components/mng-person/mng-person.component';
 import { PersonDialogComponent } from './modals/person-dialog/person-dialog.component';
+import { PersonOperationComponent } from './modals/person-operation/person-operation.component';
+import { MngPersonOperationComponent } from './components/mng-person-operation/mng-person-operation.component';
+import { ChangeStatusDialogComponent } from './modals/change-status-dialog/change-status-dialog.component';
 
 @NgModule({
   declarations: [
@@ -89,6 +92,9 @@ import { PersonDialogComponent } from './modals/person-dialog/person-dialog.comp
     CustomMultiSelectComponent,
     MngPersonComponent,
     PersonDialogComponent,
+    PersonOperationComponent,
+    MngPersonOperationComponent,
+    ChangeStatusDialogComponent,
 
   ],
   imports: [
