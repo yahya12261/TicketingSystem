@@ -16,6 +16,8 @@ import { TownService } from '../../services/Locations/townService/town.service';
 import { IPersonOperation } from '../../Interfaces/PersonOperation';
 import { PersonOperationService } from '../../services/personOperationService/person-operation.service';
 import { ServiceService } from '../../services/ServiceService/service.service';
+import { IAdditionalServiceFields } from '../../Interfaces/AdditionalServiceFields';
+import { IOperationValues } from '../../Interfaces/OperationValues';
 @Component({
   selector: 'app-person-operation',
   templateUrl: './person-operation.component.html',
@@ -55,7 +57,7 @@ OnInit{
   genderOptions=OptionList.getListByName("gender")
   dayOptions=[{}]
   monthsOptions =[{}]
-
+  extraFields :IAdditionalServiceFields[] = [];
   yearsOptions= DateUtils.getYears();
   person :IPerson = {} as IPerson;
   @Input() isFast !:"true"|"false";
@@ -67,9 +69,9 @@ OnInit{
   ngOnInit(): void {
     this.fetchAllGovernments();
     this.fetchService();
-    console.log(this.yearsOptions);
+    //console.log(this.yearsOptions);
     this.createForm(this.inpPerson);
-    console.log(this.isFast)
+    //console.log(this.isFast)
     this.spinner.hide();
   }
   onClose(){
@@ -117,7 +119,7 @@ OnInit{
       }
   }
   createForm(data?:IPerson) {
-    console.log("input",data?.dob instanceof Date)
+    //console.log("input",data?.dob instanceof Date)
 
     if(this.isFast=="true"){
 
@@ -187,7 +189,7 @@ OnInit{
   //   this.person.LID = this.myForm.value.LID;
   //   this.person.nationality = this.myForm.value.nationality;
   //   this.person.governmentAddress = {id:this.myForm.value.government};
-  //   this.person.cazaAddress= {id:this.myForm.value.cazaAddress};
+  //   this.person.cazaAddress= {id:this.myForm.value.cazaAddress};list
   //   this.person.townAddress = this.myForm.value.townAddress;
   //   this.person.phoneNumber = this.myForm.value.phoneNumber;
   //   this.person.insuranceName = this.myForm.value.insuranceName;
@@ -208,17 +210,50 @@ OnInit{
   //     this.toast.showError(error.error.message);
   //   })
   // }
+
+  private addExtraFields(): void {
+    this.extraFields.forEach(field => {
+      if(field.id){
+        const control = this.formBuilder.control('', field.isRequired ? Validators.required : null);
+        this.myForm.addControl(field.id.toString(), control);
+               // Use field ID as the control name
+      }
+
+    });
+}
+getFormControlByName(controlName: string): FormControl {
+  return this.myForm.get(controlName) as FormControl; // Cast to FormControl
+}
   onSubmit() {
+ // Initialize as an empty object
+
+
+    // //console.log(extraFieldsValues)
     this.spinner.show();
   this.customInputs.forEach((customInput) => customInput.onBlur());
   if (this.myForm.invalid) {
+    this.toast.showError("يرجى ملئ الحقول بالشكل الصحيح")
+    // if (false) {
     this.spinner.hide();
     this.setInvalidInputBorder();
 
   } else {
+      let extraFieldsValues: IOperationValues []= []  ;
+    if(this.extraFields){
+      this.extraFields.forEach(field => {
+        extraFieldsValues.push({
+          label:field.arabicLabel+"",
+          arabicLabel:this.getFormControlByName(field.id+"").value,
+          dsc:"value" + field.id
+        });
+      });
+    }
     const data :IPersonOperation={
       service:{id:this.myForm.value.service},
+      operationsValues:extraFieldsValues,
+      note : this.myForm.value.note,
     }
+
     if(this.isFast==="true"){
     const person :IPerson = {
       firstAr : this.myForm.value.firstAr,
@@ -236,7 +271,6 @@ OnInit{
       townAddress : this.myForm.value.townAddress,
       phoneNumber : this.myForm.value.phoneNumber,
       insuranceName : this.myForm.value.insuranceName,
-      note : this.myForm.value.note,
       haveInsurance:this.myForm.value.haveInsurance,
       fromMedical:this.myForm.value.fromMedical
 
@@ -264,6 +298,75 @@ data.person = person;
   getAllYears(){
   //this.yearsOptions = DateUtils.getYears();
 }
+
+  onYearChange() {
+    this.monthsOptions = DateUtils.getMonths();
+    //console.log(this.yearControl.value); // This will log the selected value
+  }
+  onMonthChange(){
+    this.dayOptions = DateUtils.getDaysByYearAndMonth(Number(this.yearControl.value),Number(this.monthsControl.value));
+  }
+  onServiceChange(){
+    this.spinner.show();
+    this.serviceService.getExtraFields(Number(this.serviceControl.value)).subscribe(data=>{
+      if(data.success){
+        this.extraFields = data.data;
+        this.addExtraFields();
+      }
+    })
+    this.spinner.hide();
+  };
+
+  fetchAllGovernments(){
+    this.spinner.show();
+    this.governmentService.getSelectOption().subscribe(data=>{
+      if(data.success){
+        this.governmentAddressOptions = data.data;
+      }
+    })
+    this.spinner.hide();
+    }
+    onGovChange(){
+      this.fetchCazaByGov(Number(this.governmentAddressControl.value));
+      this.cazaAddressControl.reset();
+      this.townAddressControl.reset();
+    }
+    onCazaChange(){
+      this.fetchTownByCaza(Number(this.cazaAddressControl.value));
+      this.townAddressControl.reset();
+    }
+    fetchCazaByGov(govId:number){
+      this.spinner.show();
+      this.cazaService.getSelectOptionByGovId(govId).subscribe(data=>{
+        if(data.success){
+          this.cazaAddressOptions = data.data;
+          this.spinner.hide();
+        }
+      })
+      this.spinner.hide();
+      }
+      fetchTownByCaza(cazaId:number){
+        this.spinner.show();
+        this.townService.getSelectOptionByCazaId(cazaId).subscribe(data=>{
+          if(data.success){
+            this.townAddressOptions = data.data;
+            this.spinner.hide();
+          }
+        })
+        this.spinner.hide();
+        }
+        fetchService(){
+          this.spinner.show();
+          this.serviceService.getSelectOption().subscribe(data=>{
+            if(data.success){
+              this.serviceOptions = data.data;
+              this.spinner.hide();
+            }
+          })
+          this.spinner.hide();
+        }
+
+
 
   get firstAr(){
     return this.myForm.get('firstAr');
@@ -341,64 +444,5 @@ data.person = person;
     return this.myForm.get("service")
   }
 
-  onYearChange() {
-    this.monthsOptions = DateUtils.getMonths();
-    console.log(this.yearControl.value); // This will log the selected value
-  }
-  onMonthChange(){
-    this.dayOptions = DateUtils.getDaysByYearAndMonth(Number(this.yearControl.value),Number(this.monthsControl.value));
-  }
-  onServiceChange(){
-
-  };
-
-  fetchAllGovernments(){
-    this.spinner.show();
-    this.governmentService.getSelectOption().subscribe(data=>{
-      if(data.success){
-        this.governmentAddressOptions = data.data;
-      }
-    })
-    this.spinner.hide();
-    }
-    onGovChange(){
-      this.fetchCazaByGov(Number(this.governmentAddressControl.value));
-      this.cazaAddressControl.reset();
-      this.townAddressControl.reset();
-    }
-    onCazaChange(){
-      this.fetchTownByCaza(Number(this.cazaAddressControl.value));
-      this.townAddressControl.reset();
-    }
-    fetchCazaByGov(govId:number){
-      this.spinner.show();
-      this.cazaService.getSelectOptionByGovId(govId).subscribe(data=>{
-        if(data.success){
-          this.cazaAddressOptions = data.data;
-          this.spinner.hide();
-        }
-      })
-      this.spinner.hide();
-      }
-      fetchTownByCaza(cazaId:number){
-        this.spinner.show();
-        this.townService.getSelectOptionByCazaId(cazaId).subscribe(data=>{
-          if(data.success){
-            this.townAddressOptions = data.data;
-            this.spinner.hide();
-          }
-        })
-        this.spinner.hide();
-        }
-        fetchService(){
-          this.spinner.show();
-          this.serviceService.getSelectOption().subscribe(data=>{
-            if(data.success){
-              this.serviceOptions = data.data;
-              this.spinner.hide();
-            }
-          })
-          this.spinner.hide();
-        }
 
 }

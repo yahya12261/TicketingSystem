@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { GridColumn } from '../../Interfaces/GridColumn';
 import { BaseService } from '../../services/BaseService/base.service';
 import { DateUtils } from '../../helpers/DateUtils';
+import { ToastService } from '../../services/ToastService/toast.service';
+import { Router } from '@angular/router';
+import { SidebarService } from '../../services/sidebarService/sidebar.service';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +16,7 @@ export class HomeComponent {
   showConfirmationDialog = false;
   confirmationMessage = 'Are you sure you want to proceed?';
 
-  constructor() { }
+  constructor(  private router: Router,private toaster :ToastService) { }
   openConfirmationDialog(): void {
     this.showConfirmationDialog = true;
   }
@@ -38,9 +41,11 @@ export class HomeComponent {
     // { header:"تاريخ الولادة",visible:true,field:"Person",format: (value: any) => {return DateUtils.formatDate(value.dob)}}
   ];
 
+  goTo(path: string) {
+    this.router.navigateByUrl(path);
+  }
   // Handle search event
   onSearch(query: string) {
-    // Perform search logic here
-    console.log('Search query:', query);
+    //console.log('Search query:', query);
   }
 }

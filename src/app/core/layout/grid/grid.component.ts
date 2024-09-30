@@ -34,6 +34,8 @@ export class GridComponent<T> implements OnInit {
 
   totalPages: number = 0;
 
+  total:number = 0;
+
   noData = false;
 
   columnCache : GridColumn[] =[];
@@ -187,7 +189,8 @@ export class GridComponent<T> implements OnInit {
     .subscribe(data => {
       const dynamicField = this.BaseService.type as keyof typeof data;
       this.filteredData = data.data.data ;
-      console.log(this.filteredData)
+      //console.log(this.filteredData)
+      this.total = data.data.total;
       this.totalPages = Math.ceil(data.data.total/data.data.pageSize);
       this.noData=this.totalPages===0
       this.spinner.hide();

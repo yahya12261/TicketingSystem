@@ -231,7 +231,7 @@ export class MngRuleComponent {
   }
 
   onOpenPagesApi(rule:IRule){
-    console.log(rule)
+    //console.log(rule)
     this.selectedRule = rule;
     this.onShowPageApis = true;
   }

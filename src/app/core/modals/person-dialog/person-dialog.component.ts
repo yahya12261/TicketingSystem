@@ -62,9 +62,9 @@ OnInit{
   }
   ngOnInit(): void {
     this.fetchAllGovernments();
-    console.log(this.yearsOptions);
+    //console.log(this.yearsOptions);
     this.createForm(this.inpPerson);
-    console.log(this.isUpdate)
+    //console.log(this.isUpdate)
     if(this.isUpdate){
     }
     this.spinner.hide();
@@ -111,7 +111,7 @@ OnInit{
       }
   }
   createForm(data?:IPerson) {
-    console.log("input",data?.dob instanceof Date)
+    //console.log("input",data?.dob instanceof Date)
     this.firstArController = this.formBuilder.control((data)?data.firstAr:'', Validators.required);
   this.middleArController = this.formBuilder.control((data)?data.middleAr:'', Validators.required);
   this.lastArController = this.formBuilder.control((data)?data.lastAr:'', Validators.required);
@@ -295,7 +295,7 @@ OnInit{
   }
   onYearChange() {
     this.monthsOptions = DateUtils.getMonths();
-    console.log(this.yearControl.value); // This will log the selected value
+    //console.log(this.yearControl.value); // This will log the selected value
   }
   onMonthChange(){
     this.dayOptions = DateUtils.getDaysByYearAndMonth(Number(this.yearControl.value),Number(this.monthsControl.value));

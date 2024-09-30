@@ -28,7 +28,7 @@ export class ResetPasswordComponent implements OnInit {
   ngOnInit(): void {
   this.route.paramMap.subscribe(params => {
     if(params){
-      console.log(params.get('token'));
+      //console.log(params.get('token'));
       this.token = params.get('token');
     }
   });
@@ -69,35 +69,36 @@ export class ResetPasswordComponent implements OnInit {
   }
   validate(): boolean {
     if (!this.pass1 || !this.pass2) {
-      this.errorMsg = 'يرجى ملئ الحقول المطلوبة';
-      return false;
+        this.errorMsg = 'يرجى ملئ الحقول المطلوبة';
+        return false;
     }
 
-    // Check if password 1 meets the requirements
-    //Yahya123^
-    const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!?$%^*])[a-zA-Z\d!#$%^*]{8,}$/;
+    // Simplified password regex
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d).{8,}$/;
     if (!passwordRegex.test(this.pass1)) {
-      this.errorMsg = 'كلمة المرور ينبغي أن تكون طول الأقل 8 أحرف وتحتوي على حرف كبير وحرف صغير وعدد وأحد الرموز التالية: !$%^*';
-      return false;
+        this.errorMsg = 'كلمة المرور ينبغي أن تكون طول الأقل 8 أحرف وتحتوي على حرف واحد وعدد';
+        return false;
     }
 
     // Check if password 1 and password 2 match
     if (this.pass1 !== this.pass2) {
-      this.errorMsg = 'كلمتا المرور غير متطابقتين';
-      return false;
+        this.errorMsg = 'كلمتا المرور غير متطابقتين';
+        return false;
     }
 
     // Check for SQL injection
     if (this.containsSqlInjection(this.pass1) || this.containsSqlInjection(this.pass2)) {
-      this.errorMsg = 'تم استعمال رموز لايمكن استعمالها في كلمة المرور';
-      return false;
+        this.errorMsg = 'تم استعمال رموز لايمكن استعمالها في كلمة المرور';
+        return false;
     }
-    this.errorMsg="";
-    return true;
-  }
 
-  containsSqlInjection(input: string): boolean {
+    this.errorMsg = "";
+    return true;
+}
+
+containsSqlInjection(input: string): boolean {
     const sqlInjectionRegex = /(?:--|#|\/\*|\*\/|;|,|'|"|=|>|<|@|`|&&|\|\|)/i;
     return sqlInjectionRegex.test(input);
-  }
+}
+
 }

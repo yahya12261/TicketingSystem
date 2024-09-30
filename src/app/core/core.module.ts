@@ -51,7 +51,16 @@ import { PersonDialogComponent } from './modals/person-dialog/person-dialog.comp
 import { PersonOperationComponent } from './modals/person-operation/person-operation.component';
 import { MngPersonOperationComponent } from './components/mng-person-operation/mng-person-operation.component';
 import { ChangeStatusDialogComponent } from './modals/change-status-dialog/change-status-dialog.component';
-
+import { MngAssignersAndAssignedComponent } from './components/mng-assigners-and-assigned/mng-assigners-and-assigned.component';
+import { MngAssignersModalComponent } from './modals/mng-assigners-modal/mng-assigners-modal.component';
+import { ChangeAssignModalComponent } from './modals/change-assign-modal/change-assign-modal.component';
+import { MngAdditionalServiceFieldListComponent } from './components/mng-additional-service-field-list/mng-additional-service-field-list.component';
+import { AdditionalServiceFieldListModalComponent } from './modals/Setup/additional-service-field-list-modal/additional-service-field-list-modal.component';
+import { MngAdditionalFieldsComponent } from './components/mng-additional-fields/mng-additional-fields.component';
+import { AdditionalFieldsModalComponent } from './modals/Setup/additional-fields-modal/additional-fields-modal.component';
+import { OperationPageComponent } from './components/operation-page/operation-page.component';
+import { AddChangesModalComponent } from './modals/add-changes-modal/add-changes-modal.component';
+import { OrderByPipe } from './helpers/OrderByPipe';
 @NgModule({
   declarations: [
     CoreComponent,
@@ -95,6 +104,16 @@ import { ChangeStatusDialogComponent } from './modals/change-status-dialog/chang
     PersonOperationComponent,
     MngPersonOperationComponent,
     ChangeStatusDialogComponent,
+    MngAssignersAndAssignedComponent,
+    MngAssignersModalComponent,
+    ChangeAssignModalComponent,
+    MngAdditionalServiceFieldListComponent,
+    AdditionalServiceFieldListModalComponent,
+    MngAdditionalFieldsComponent,
+    AdditionalFieldsModalComponent,
+    OperationPageComponent,
+    AddChangesModalComponent,
+    OrderByPipe
 
   ],
   imports: [

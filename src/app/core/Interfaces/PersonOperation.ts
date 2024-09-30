@@ -1,4 +1,6 @@
 import { BaseInterface } from "./BaseInterface"
+import { IOperationChanges } from "./operationChanges"
+import { IOperationValues } from "./OperationValues"
 import { IPerson } from "./Person"
 import { IService } from "./Service"
 import { IStatus } from "./Status/Status"
@@ -11,4 +13,6 @@ export interface IPersonOperation extends BaseInterface {
     status?:IStatus
     assignTo?:IUser
     reporter?:IUser
+    operationsChanges?:IOperationChanges[]
+    operationsValues?:IOperationValues[]
 }

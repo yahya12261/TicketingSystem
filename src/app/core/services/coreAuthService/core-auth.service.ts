@@ -19,8 +19,8 @@ export class CoreAuthService extends BaseService<User>{
   }
 
   hasPermission(permission: string): boolean {
-    console.log("this", this.permissions);
-    console.log("sent", permission);
+    //console.log("this", this.permissions);
+    //console.log("sent", permission);
     if(Array.isArray(this.permissions)){
       return this.permissions.some(perm => perm.name === permission);
     }

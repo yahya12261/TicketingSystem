@@ -1,0 +1,51 @@
+<div class="confirmation-dialog-container">
+  <article class="modal-container">
+    <header class="modal-container-header">
+      <h2 class="modal-container-title">
+        إضافة محولين
+      </h2>
+    </header>
+    <section class="modal-container-body rtf">
+      <form [formGroup]="myForm" >
+        <div class="container">
+          <div class="row">
+            <div class="col-6">
+              <div class="form-group">
+                <app-custom-select
+                formControlName="assigner"
+                [label]="'الموجه'"
+                [control]="assignerControl"
+                [required]="true"
+                [errorMessage]="'حقل إجباري'"
+                [placeholder]="'يرجى اختيار '"
+                [options]="positions"
+                [labelValue]="'arabicLabel'"
+                [value]="'id'"
+              ></app-custom-select>
+              </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group">
+                  <app-custom-select
+                  formControlName="assigned"
+                  [label]="'الموجه له'"
+                  [control]="assignedControl"
+                  [required]="true"
+                  [errorMessage]="'حقل إجباري'"
+                  [placeholder]="'يرجى اختيار '"
+                  [options]="positions"
+                  [labelValue]="'arabicLabel'"
+                  [value]="'id'"
+                ></app-custom-select>
+                </div>
+                </div>
+        </div>
+        </div>
+      </form>
+    </section>
+    <footer class="modal-container-footer">
+      <button class="button is-ghost" (click)="onClose()" >إلغاء</button>
+      <button class="button is-primary" (click)="onSubmit()" > إضافة </button>
+    </footer>
+  </article>
+</div>

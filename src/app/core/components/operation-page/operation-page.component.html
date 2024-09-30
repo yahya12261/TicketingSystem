@@ -1,0 +1,124 @@
+<div class="container mt-4">
+  <div class="modal-wrapper" *ngIf="onChangeStatus" [ngClass]="{'fade-in': onChangeStatus, 'fade-out': !onChangeStatus}">
+    <div class="modal-overlay"></div>
+    <app-change-status-dialog  (closeClicked) = "onCloseChangeStatus()" [operation]='operationData'></app-change-status-dialog>
+  </div>
+
+  <div class="modal-wrapper" *ngIf="onChangeAssign" [ngClass]="{'fade-in': onChangeAssign, 'fade-out': !onChangeAssign}">
+    <div class="modal-overlay"></div>
+    <app-change-assign-modal (closeClicked)="onCloseChangeStatus()" [operation]="operationData"></app-change-assign-modal>
+  </div>
+
+  <div class="modal-wrapper" *ngIf="onAddChange" [ngClass]="{'fade-in': onAddChange, 'fade-out': !onAddChange}">
+    <div class="modal-overlay"></div>
+    <app-add-changes-modal (closeClicked)="onCloseChangeStatus()" [personOperation]="operationData"></app-add-changes-modal>
+
+  </div>
+  <div class="row">
+    <!--Actions : change Status  , tahwil , add Comment -->
+    <div class="col-4">
+      <input type="submit" class="fadeIn fourth" (click)="onOpenAddChanges()"   value="إضافة متابعة ">
+    </div>
+    <div class="col-4">
+      <input type="submit" class="fadeIn fourth" (click)="onOpenChangeStatus()"   value="تغير الحالة">
+    </div>
+    <div class="col-4">
+      <input type="submit" class="fadeIn fourth" (click)="onOpenChangeAssign()"   value="تحويل">
+    </div>
+
+
+  </div>
+  <h1 class="text-center">تفاصيل العملية</h1>
+  <div class="row">
+    <div class="col-4">
+      <div class="card mb-3">
+        <div class="card-header">أنشأت بواسطة</div>
+        <div class="card-body">
+            <p><strong>الاسم:</strong> {{ operationData.createdBy?.arabicLabel }} ({{ operationData.createdBy?.arabicLabel }})</p>
+            <p><strong>البريد الإلكتروني:</strong> {{ operationData.createdBy?.email }}</p>
+        </div>
+    </div>
+    </div>
+    <div class="col-4">
+      <div class="card mb-3">
+        <div class="card-header">متابع الحالة</div>
+        <div class="card-body">
+            <p><strong>الاسم:</strong> {{ operationData.assignTo?.arabicLabel }} ({{ operationData.assignTo?.arabicLabel }})</p>
+            <p><strong>البريد الإلكتروني:</strong> {{ operationData.assignTo?.email }}</p>
+        </div>
+    </div>
+    </div>
+    <div class="col-4">
+      <div class="card mb-3">
+        <div class="card-header">المشرف عن الحالة</div>
+        <div class="card-body">
+            <p><strong>الاسم:</strong> {{ operationData.reporter?.arabicLabel }} ({{ operationData.reporter?.arabicLabel }})</p>
+            <p><strong>البريد الإلكتروني:</strong> {{ operationData.reporter?.email }}</p>
+        </div>
+    </div>
+    </div>
+  </div>
+  <div class="card mb-3">
+    <div class="card-header">تفاصيل الخدمة</div>
+    <div class="card-body">
+        <p><strong>الاسم:</strong> {{ operationData.service?.name }}</p>
+        <p><strong>التسمية بالعربية:</strong> {{ operationData.service?.arabicLabel }}</p>
+        <p style="color:{{operationData.status?.color}}"><strong>الحالة:</strong> {{ operationData.status?.arabicLabel }} ({{ operationData.status?.name }})</p>
+        <p><strong>التفاصيل :</strong> {{ operationData.note }}</p>
+      </div>
+</div>
+<div class="row">
+  <div class="col-6">
+    <div class="card mb-3">
+      <div class="card-header">معلومات أساسية</div>
+      <div class="card-body">
+          <p><strong>المعرف:</strong> {{ operationData.id }}</p>
+
+          <p><strong>تاريخ الإنشاء:</strong> {{ operationData.createdAt | date:'yyyy-MM-dd HH:mm' }}</p>
+          <p><strong>تاريخ التحديث:</strong> {{ operationData.updatedAt | date:'yyyy-MM-dd HH:mm' }}</p>
+      </div>
+  </div>
+</div>
+  <div class="col-6">
+    <div class="card mb-3">
+    <div class="card-header">تفاصيل الشخص</div>
+    <div class="card-body">
+        <p><strong>الاسم:</strong> {{ operationData.person?.firstAr }} {{ operationData.person?.middleAr }} {{ operationData.person?.lastAr }}</p>
+        <p><strong>رقم الهاتف:</strong> {{ operationData.person?.phoneNumber }}</p>
+        <p><strong>الجنس:</strong> {{ operationData.person?.Gender=='male'?"ذكر":"انثى" }}</p>
+        <p><strong>الجنسية:</strong> {{getNationalityInArabic(operationData.person?.nationality) }}</p>
+    </div>
+</div>
+</div>
+</div>
+
+  <div *ngIf="operationData.operationsValues&&operationData.operationsValues.length> 0" >
+    <div class="card mb-3">
+        <div class="card-header">قيم العمليات</div>
+        <div class="card-body">
+            <ul class="list-group">
+                <li *ngFor="let value of operationData.operationsValues" class="list-group-item">
+                     {{ value.label }} - <strong></strong> {{ value.arabicLabel }}
+                </li>
+            </ul>
+        </div>
+    </div>
+  </div>
+
+
+<div *ngIf="operationData.operationsChanges&&operationData.operationsChanges.length> 0" >
+  <div class="card mb-3">
+      <div class="card-header">المتابعات</div>
+      <div class="card-body">
+          <div *ngFor="let change of operationData.operationsChanges | orderBy: 'createdAt': true" class="card mb-2">
+              <div class="card-body">
+                  <p><strong>ملاحظة:</strong> {{ change.note }}</p>
+                  <p><strong>تاريخ:</strong> {{ change.createdAt | date:'yyyy-MM-dd HH:mm' }}</p>
+                  <p><strong>بواسطة:</strong> {{ change.createdBy?.arabicLabel}}</p>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+</div>

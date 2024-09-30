@@ -58,11 +58,11 @@ export class ChangeStatusDialogComponent implements OnInit {
 
   buildStatusOptions(){
     this.spinner.show();
-    console.log("this.operation",this.operation)
+    //console.log("this.operation",this.operation)
     if(this.operation.status&&this.operation.status.id&&this.operation.service&&this.operation.service.id){
       this.flowService.getStatusFlowByCurrentStatusAndServiceId(this.operation.status.id,this.operation.service.id).subscribe(data=>{
           if(data.success){
-            console.log(data.data)
+            //console.log(data.data)
             this.statusOption = data.data[0].nextStatuses ;
             this.spinner.hide();
           }else{
@@ -95,10 +95,10 @@ export class ChangeStatusDialogComponent implements OnInit {
   //       if(data.data.position)
   //         this.buildStatusOptions(data.data.position);
 
-  //       console.log(data.data.position)
+  //       //console.log(data.data.position)
 
   //       this.userPosition = (data.data.position)?data.data.position:{};
-  //       console.log(this.userPosition)
+  //       //console.log(this.userPosition)
   //       // this.spinner.hide();
   //     }
   //     this.spinner.hide();

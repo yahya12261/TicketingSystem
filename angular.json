@@ -24,6 +24,7 @@
               "src/favicon.ico",
               "src/assets",
               "src/assets/fonts",
+              "src/web.config",
               {
                 "glob": "**/*",
                 "input": "src/assets/fontawesome-free-6.5.2-web/webfonts",

@@ -44,7 +44,7 @@ OnInit{
     this.fetchAllServices();
     this.fetchAllPositions();
     this.createForm(this.input);
-    console.log(this.input)
+    //console.log(this.input)
     if(this.isUpdate){
     }
 
@@ -63,7 +63,7 @@ OnInit{
   //     }
   // }
   createForm(data?:IStatusFlow) {
-    console.log(data)
+    //console.log(data)
     this.arabicNameControl = this.formBuilder.control((data)?data.arabicLabel:'', Validators.required);
     this.statusControl = this.formBuilder.control((data)?data.refStatus.id:'', Validators.required);
     this.noteControl = this.formBuilder.control((data)?data.note:'');
@@ -136,7 +136,7 @@ OnInit{
       this.statusService.getSelectOption().subscribe(data=>{
         if(data.success){
           this.allStatuses =  data.data;
-          console.log(this.allStatuses)
+          //console.log(this.allStatuses)
         }
       })
 
@@ -159,7 +159,7 @@ OnInit{
     }
 
 getObjectArray():IStatus[]{
-  console.log(this.myForm.value.nextStatus);
+  //console.log(this.myForm.value.nextStatus);
   if(Array.isArray(this.myForm.value.nextStatus))
     return this.myForm.value.nextStatus.map((id:any) => ({ id: Number(id) }));
   return [];

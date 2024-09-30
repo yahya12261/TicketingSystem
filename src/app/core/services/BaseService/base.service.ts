@@ -68,7 +68,7 @@ export abstract class BaseService<T> {
     const headers = this.getHeaders();
     return this.http.get<T>(url, { headers });
   }
-  
+
   private generateBoundary(): string {
     const boundary = '----------' + Math.random().toString().substr(2, 25);
     return boundary;
@@ -81,7 +81,7 @@ export abstract class BaseService<T> {
 
   create(entity: { [key: string]: any }): Observable<{data:T,message:string,success:boolean}> {
     const headers = this.getHeaders();
-    console.log(entity)
+    //console.log(entity)
     return this.http.post<any>(this.apiUrl, entity, { headers }).pipe(
       switchMap((response) => {
           return of({data:response.data as T,

@@ -1,0 +1,5 @@
+<h1>لائحة القوائم الإضافية</h1>
+<input type="submit" class="fadeIn fourth" (click)="onOpenAddModal()"   value="إضافة">
+<app-additional-service-field-list-modal *ngIf ="onAdd" (closeClicked) = "onCloseAddModal()" [isUpdate]='"false"'></app-additional-service-field-list-modal>
+<app-additional-service-field-list-modal *ngIf ="onEdit" (closeClicked) = "onCloseEditModal()" [isUpdate]='"true"' [inpItem]="update"></app-additional-service-field-list-modal>
+<app-grid [pageSize]="10" [columns]="gridColumns" [BaseService]="service" [GridOrder]="defaultOrder" [gridName]="'mngAdditionalFieldList'" (search)="onSearch($event)"></app-grid>

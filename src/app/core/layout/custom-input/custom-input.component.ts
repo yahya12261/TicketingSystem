@@ -27,7 +27,7 @@ import { AbstractControl, ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR }
     `
       .is-invalid {
         border: 1px solid red;
-        
+
       }
       .is-required::after{
          content: "*";
@@ -79,8 +79,12 @@ export class CustomInputComponent implements ControlValueAccessor, OnInit {
 
   onBlur() {
     this.errorMessage = (this.required==="true")? "حقل إجباري":"خطأ";
-    this.invalid = this.control.invalid;
+    if(this.control){
+      this.invalid = this.control.invalid;
+
     this.valid = !this.control.invalid;
+    }
+
     this.onTouched();
   }
 

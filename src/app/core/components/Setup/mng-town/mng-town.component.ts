@@ -132,7 +132,7 @@ onSearch(query: string) {
   //   this.searchedGov =Number(GridUtils.getValueFromQueryByParameterName(query,"government.id"));
   //  this.gridColumns[5].searchValue = this.gridColumns[5].searchList[1].id;
   // }
-  console.log(query);
+  //console.log(query);
   this.fetchAllCaza();
 
 }

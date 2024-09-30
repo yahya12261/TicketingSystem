@@ -168,6 +168,14 @@ select {
   border: none;
   font-family: 'Font Awesome 5 Free';
 }
+.no-data {
+    color: #bdbd13;
+}
+
+.no-data i {
+    font-size: 50px;
+    margin-bottom: 20px;
+}
 .button {
   border-radius:4px;
   background-color: #0f3e56;

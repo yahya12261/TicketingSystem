@@ -28,7 +28,7 @@ OnInit{
   }
   ngOnInit(): void {
     this.createForm(this.inpGovernment);
-    console.log(this.isUpdate)
+    //console.log(this.isUpdate)
     if(this.isUpdate){
     }
     this.spinner.hide();

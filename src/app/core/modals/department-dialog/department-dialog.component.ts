@@ -28,9 +28,9 @@ OnInit{
   }
   ngOnInit(): void {
     this.createForm(this.department);
-    console.log(this.isUpdate)
+    //console.log(this.isUpdate)
     if(this.isUpdate){
-      console.log(this.department);
+      //console.log(this.department);
 
     }
     this.spinner.hide();

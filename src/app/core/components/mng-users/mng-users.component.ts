@@ -329,7 +329,7 @@ export class MngUsersComponent {
   }
 
   onOpenAccessModal(user:IUser){
-    console.log(user)
+    //console.log(user)
     this.selectedUser = user;
     this.accessModal = true;
   }

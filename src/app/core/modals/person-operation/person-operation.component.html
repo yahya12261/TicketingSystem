@@ -206,7 +206,32 @@
             (change)="onServiceChange()"
         ></app-custom-select>
           </div>
+
         </div>
+        <div *ngIf="extraFields.length > 0">
+
+          <div class="row">
+            <h3>حقول الخدمة</h3>
+              <div *ngFor="let field of extraFields">
+                <div *ngIf="field.fieldType+'' !=='list'&&field.fieldType+'' !=='checkbox'">
+                      <app-custom-input [type]="field.fieldType+''" [label]="field.arabicLabel+''"  [formControlName]="field.id+''" [formControl]="getFormControlByName(field.id+'')" required = "field.isRequired==='true'"></app-custom-input>
+                </div>
+                <div *ngIf="field.fieldType+'' === 'list'">
+                  <app-custom-select
+                      [label]="field.arabicLabel+''"
+                      [control]="getFormControlByName(field.id+'')"
+                      [required]="field.isRequired===true"
+                      [errorMessage]="'حقل إجباري'"
+                      [placeholder]="''"
+                      [options]="field.list"
+                      [labelValue]="'arabicLabel'"
+                      [value]="'arabicLabel'"
+                      [isFetchedData] = "false"
+                  ></app-custom-select>
+            </div>
+              </div>
+          </div>
+      </div>
           <div class="row">
             <div class="col-12">
               <div class="form-group">
@@ -232,6 +257,30 @@
           ></app-custom-select>
             </div>
           </div>
+          <div *ngIf="extraFields.length > 0">
+
+            <div class="row">
+              <h3>حقول الخدمة</h3>
+                <div *ngFor="let field of extraFields">
+                  <div *ngIf="field.fieldType+'' !=='list'&&field.fieldType+'' !=='checkbox'">
+                        <app-custom-input [type]="field.fieldType+''" [label]="field.arabicLabel+''"  [formControlName]="field.id+''" [formControl]="getFormControlByName(field.id+'')" required = "field.isRequired==='true'"></app-custom-input>
+                  </div>
+                  <div *ngIf="field.fieldType+'' === 'list'">
+                    <app-custom-select
+                        [label]="field.arabicLabel+''"
+                        [control]="getFormControlByName(field.id+'')"
+                        [required]="field.isRequired===true"
+                        [errorMessage]="'حقل إجباري'"
+                        [placeholder]="''"
+                        [options]="field.list"
+                        [labelValue]="'arabicLabel'"
+                        [value]="'arabicLabel'"
+                        [isFetchedData] = "false"
+                    ></app-custom-select>
+              </div>
+                </div>
+            </div>
+        </div>
         </div>
       </form>
     </section>

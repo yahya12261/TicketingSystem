@@ -54,7 +54,6 @@ export enum Nationality {
   Iranian = "Iranian",
   Iraqi = "Iraqi",
   Irish = "Irish",
-  Israeli = "Israeli",
   Italian = "Italian",
   Jamaican = "Jamaican",
   Japanese = "Japanese",
@@ -177,7 +176,6 @@ const translations: { [key in Nationality]: string } = {
   [Nationality.Iranian]: "إيراني",
   [Nationality.Iraqi]: "عراقي",
   [Nationality.Irish]: "إيرلندي",
-  [Nationality.Israeli]: "إسرائيلي",
   [Nationality.Italian]: "إيطالي",
   [Nationality.Jamaican]: "جامايكي",
   [Nationality.Japanese]: "ياباني",
@@ -253,4 +251,4 @@ export function getNationalitiesArray() {
 
 // Example usage
 const nationalitiesArray = getNationalitiesArray();
-console.log(nationalitiesArray);
+//console.log(nationalitiesArray);

@@ -3,3 +3,15 @@
   <h1>لائحة الخدمات</h1>
   <app-grid [pageSize]="10" [columns]="gridColumns" [BaseService]="userService" (search)="onSearch($event)"></app-grid>
 </div> -->
+<div class="container" style="font-size: xx-large;">
+  <div class="row ">
+      <div class="col-md-4" *permissionCheck="'personOperation'" (click)="goTo('core/person-operations')">
+          <div class="card shadow">
+            <span class="menu-text"> <i class="fa-solid fa-file-waveform p-1" ></i>الخدمات</span>
+          </div>
+        </div>
+            <div class="col-md-4" *permissionCheck="'Person'" (click)="goTo('core/person')">
+              <div class="card shadow">
+                <span class="menu-text"> <i class="fa-solid fa-users p-1"></i>الأشخاص</span>
+</div>
+</div>

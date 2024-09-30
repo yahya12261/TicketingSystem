@@ -35,7 +35,7 @@ OnInit{
   ngOnInit(): void {
     this.fetchAllCazas();
     this.createForm(this.inpTown);
-    console.log(this.isUpdate)
+    //console.log(this.isUpdate)
     if(this.isUpdate){
     }
     this.spinner.hide();

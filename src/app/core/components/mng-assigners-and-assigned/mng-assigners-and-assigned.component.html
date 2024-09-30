@@ -1,0 +1,5 @@
+<h1>لائحة اذونات التحويل</h1>
+<input type="submit" class="fadeIn fourth" (click)="onOpenAddAssigners()"   value="إضافة إختصاص">
+<app-mng-assigners-modal *ngIf="onAdd" (closeClicked) = "onCloseAddAssigners()"></app-mng-assigners-modal>
+<app-grid [pageSize]="10" [columns]="gridColumns" [BaseService]="service" [GridOrder]="defaultOrder" [gridName]="'mngAssigner'" (search)="onSearch($event)" [path]="path"></app-grid>
+

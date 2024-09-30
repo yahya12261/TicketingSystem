@@ -1,0 +1,27 @@
+<div class="confirmation-dialog-container">
+  <article class="modal-container">
+    <header class="modal-container-header">
+      <h2 class="modal-container-title">
+        تحويل
+      </h2>
+    </header>
+    <section class="modal-container-body rtf">
+      <form [formGroup]="myForm" >
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+              <div class="form-group">
+              <label>ملاحظات</label>
+              <textarea class="form-control" formControlName="note"></textarea>
+            </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </section>
+    <footer class="modal-container-footer">
+      <button class="button is-ghost" (click)="onClose()" >إلغاء</button>
+      <button class="button is-primary" (click)="onSubmit()" > تحويل </button>
+    </footer>
+  </article>
+</div>

@@ -45,7 +45,13 @@ export class OptionList {
           { arabicLabel: 'انثى', value: 'female' },
         ];
       case 'nationality':
-        getNationalitiesArray();
+       return getNationalitiesArray();
+        case'inputTypes':
+        return [
+          {arabicLabel:'number'},{arabicLabel:'text'},
+          {arabicLabel:'date'},{arabicLabel:'boolean'},
+          {arabicLabel:'list'},{arabicLabel:'checkbox'},
+        ]
     }
     return [];
   }

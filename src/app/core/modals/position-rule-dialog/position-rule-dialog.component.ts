@@ -152,7 +152,7 @@ OnInit{
 
   }
   ngOnInit(): void {
-    console.log(this.position)
+    //console.log(this.position)
     this.path = "/positionRules/"+this.position.id;
   }
   onSearch(query: string) {

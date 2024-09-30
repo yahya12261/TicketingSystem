@@ -56,7 +56,7 @@ export class LoginFormComponent implements OnInit {
     this.apiService.login(this.user).subscribe({
       next: (data) => {
 
-        console.log(data);
+        //console.log(data);
 
         if (data.success) {
           this.toast.showSuccess(data.message);
@@ -86,7 +86,7 @@ export class LoginFormComponent implements OnInit {
 
   }
   onSAuthSubmit(){
-    console.log(this.user)
+    //console.log(this.user)
     if(this.validateOTPAuth()){
       this.spinner.show();
       this.apiService.loginByOTP(this.user).subscribe({

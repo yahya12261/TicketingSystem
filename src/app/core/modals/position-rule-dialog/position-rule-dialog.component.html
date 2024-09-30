@@ -20,7 +20,7 @@
           <option >
           </option>
             <option *ngFor="let page of pages" value="{{page.id}}">
-              {{page?.name}}--{{ page?.methodType}}
+              {{page?.arabicLabel}}--{{ page?.type}}
             </option>
         </select>
         <input *ngIf="onAddApi" type="submit" class="fadeIn fourth" (click)="addApi()"  value="إضافة">

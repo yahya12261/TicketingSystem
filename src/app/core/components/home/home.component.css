@@ -1,0 +1,11 @@
+.card {
+  margin:150px;
+  margin-top: 20px; /* Space from the top */
+  border-radius: 15px; /* Rounded corners */
+  display: flex; /* Flexbox for centering */
+  align-items: center; /* Center vertically */
+  justify-content: center; /* Center horizontally */
+  text-align: center; /* Center text */
+  height: 400px;
+  width:400px;
+}

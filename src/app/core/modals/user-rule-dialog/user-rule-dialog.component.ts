@@ -151,7 +151,7 @@ OnInit{
 
   }
   ngOnInit(): void {
-    console.log(this.user)
+    //console.log(this.user)
     this.path = "/getUserRules/"+this.user.id;
   }
   onSearch(query: string) {

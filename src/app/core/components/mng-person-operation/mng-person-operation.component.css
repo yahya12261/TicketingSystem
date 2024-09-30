@@ -19,3 +19,59 @@ input[type=submit], input[type=submit], input[type=reset]  {
   -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
+.modal-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Ensure it sits above other content */
+  transition: opacity 0.3s ease; /* Transition for fade effect */
+  opacity: 0; /* Initially hidden */
+}
+
+.modal-wrapper.fade-in {
+  opacity: 1; /* Fully visible */
+}
+
+.modal-wrapper.fade-out {
+  opacity: 0; /* Fully hidden */
+  pointer-events: none; /* Prevent interaction when fading out */
+}
+
+.modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.323); /* 20% opacity */
+  z-index: 999; /* Ensure the overlay is below the modal */
+}
+app-change-status-dialog{
+  position: relative;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  z-index: 1001; /* Ensure it sits above the overlay */
+  width: 90%; /* Responsive width */
+  max-width: 500px; /* Max width for larger screens */}
+app-person-operation{
+  position: relative;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  z-index: 1001; /* Ensure it sits above the overlay */
+  /* width: 100%; */
+  max-width: 900px; /* Responsive width */
+ /* Max width for larger screens */}
+app-change-assign-modal{  position: relative;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  z-index: 1001; /* Ensure it sits above the overlay */
+  width: 90%; /* Responsive width */
+  max-width: 500px; /* Max width for larger screens */}

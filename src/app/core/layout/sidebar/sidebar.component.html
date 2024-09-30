@@ -27,6 +27,11 @@
           </a>
         </li>
         <li>
+          <a *permissionCheck="'assigners'" class="dropdown-item" routerLinkActive="active" (click)="goTo('core/setup/assigners')">
+            <span class="menu-text"> <i class="fa-solid fa-list-ul p-1"></i>اذونات التحويل</span>
+          </a>
+        </li>
+        <li>
           <a *permissionCheck="'caza'" class="dropdown-item" routerLinkActive="active" (click)="goTo('core/setup/caza')">
             <span class="menu-text"><i class="fa-solid fa-list-ul p-1"></i>الأقضية</span>
           </a>
@@ -51,6 +56,17 @@
             <span class="menu-text"><i class="fa-solid fa-list-ul p-1"></i>مسار الحالات</span>
           </a>
         </li>
+        <li>
+          <a *permissionCheck="'mngAdditionalFieldList'" class="dropdown-item" routerLinkActive="active" (click)="goTo('core/setup/additional-field-list')">
+            <span class="menu-text"><i class="fa-solid fa-list-ul p-1"></i>القوائم الإضافية</span>
+          </a>
+        </li>
+        <li>
+          <a *permissionCheck="'mngAdditionalField'" class="dropdown-item" routerLinkActive="active" (click)="goTo('core/setup/additional-field')">
+            <span class="menu-text"><i class="fa-solid fa-list-ul p-1"></i>إضافات الخدمات</span>
+          </a>
+        </li>
+
       </ul>
     </li>
     <li class="dropdown">

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { GridColumn } from '../../Interfaces/GridColumn';
 import { InputType } from '../../enums/InputTypes';
 import { DateUtils } from '../../helpers/DateUtils';
@@ -13,19 +13,22 @@ import { UserService } from '../../services/UserService/user.service';
 import { ServiceService } from '../../services/ServiceService/service.service';
 import { IPerson } from '../../Interfaces/Person';
 import { IPersonOperation } from '../../Interfaces/PersonOperation';
+import { Router } from '@angular/router';
+import { GridComponent } from '../../layout/grid/grid.component';
 
 @Component({
   selector: 'app-mng-person-operation',
   templateUrl: './mng-person-operation.component.html',
-  styleUrls: ['./mng-person-operation.component.css']
+  styleUrls: ['./mng-person-operation.component.css'],
 })
 export class MngPersonOperationComponent {
   defaultOrder: string = 'orderBy=createdAt&order=DESC';
   onAddFast = false;
   onAddOld = false;
   onChangeStatus = false;
-  person:IPerson = {}as IPerson
-  personOperation :IPersonOperation = {} as IPersonOperation;
+  onChangeAssign = false;
+  person: IPerson = {} as IPerson;
+  personOperation: IPersonOperation = {} as IPersonOperation;
   gridColumns: GridColumn[] = [
     {
       header: 'إجراءات',
@@ -35,12 +38,27 @@ export class MngPersonOperationComponent {
       actions: (value: any) => {
         return [
           {
+            label: 'فتح',
+            action: () => this.goToOperationPage(value.id),
+            visible: (item: any) => {
+              return true;
+            },
+          },
+          {
             label: 'تغير الحالة',
             action: () => this.onOpenChangeStatus(value),
             visible: (item: any) => {
               return true;
             },
           },
+          {
+            label: 'تحويل',
+            action: () => this.onOpenChangeAssign(value),
+            visible: (item: any) => {
+              return true;
+            },
+          },
+
           // {
           //   label: 'إضافة خدمة',
           //   action: () => this.onOpenAddService(value),
@@ -76,139 +94,139 @@ export class MngPersonOperationComponent {
       searchOperation: 'EQUAL',
     },
     {
-      header: "الأسم الأول",
+      header: 'الأسم الأول',
       visible: true,
-      field: "person",
+      field: 'person',
       type: InputType.TEXT,
       searchableField: true,
-      selectQueryName: "person.firstAr",
+      selectQueryName: 'person.firstAr',
       isOrderByField: false,
-      searchOperation: "BEGIN_WITH",
+      searchOperation: 'BEGIN_WITH',
       format(value) {
-        return GridUtils.getDataFromObject(value,"firstAr");
+        return GridUtils.getDataFromObject(value, 'firstAr');
       },
     },
     {
-      header: "اسم الأب",
+      header: 'اسم الأب',
       visible: true,
-      field: "person",
+      field: 'person',
       type: InputType.TEXT,
       searchableField: true,
-      selectQueryName: "person.middleAr",
+      selectQueryName: 'person.middleAr',
       isOrderByField: false,
-      searchOperation: "BEGIN_WITH",
+      searchOperation: 'BEGIN_WITH',
       format(value) {
-        return GridUtils.getDataFromObject(value,"middleAr");
+        return GridUtils.getDataFromObject(value, 'middleAr');
       },
     },
     {
-      header: "الشهرة",
+      header: 'الشهرة',
       visible: true,
-      field: "person",
+      field: 'person',
       type: InputType.TEXT,
       searchableField: true,
-      selectQueryName: "person.lastAr",
+      selectQueryName: 'person.lastAr',
       isOrderByField: false,
-      searchOperation: "BEGIN_WITH",
+      searchOperation: 'BEGIN_WITH',
       format(value) {
-        return GridUtils.getDataFromObject(value,"lastAr");
+        return GridUtils.getDataFromObject(value, 'lastAr');
       },
     },
     {
-      header: "تاريخ الولادة",
+      header: 'تاريخ الولادة',
       visible: true,
-      field: "person",
+      field: 'person',
       type: InputType.DATE,
       searchableField: false,
-      selectQueryName: "person.dob",
+      selectQueryName: 'person.dob',
       format(value) {
-        return DateUtils.formatDateAndCalculateAge(GridUtils.getDataFromObject(value,"dob"));
+        return DateUtils.formatDateAndCalculateAge(
+          GridUtils.getDataFromObject(value, 'dob')
+        );
       },
-      isOrderByField: false
+      isOrderByField: false,
     },
     {
-      header: "رقم الهاتف",
+      header: 'رقم الهاتف',
       visible: true,
-      field: "person",
+      field: 'person',
       type: InputType.TEXT,
       searchableField: true,
-      selectQueryName: "person.phoneNumber",
+      selectQueryName: 'person.phoneNumber',
       isOrderByField: false,
       format(value) {
-        return GridUtils.getDataFromObject(value,"phoneNumber");
+        return GridUtils.getDataFromObject(value, 'phoneNumber');
       },
     },
     {
-      header: "الخدمة",
+      header: 'الخدمة',
       visible: true,
-      field: "service",
+      field: 'service',
       type: InputType.LIST,
       searchableField: true,
-      selectQueryName: "service.id",
+      selectQueryName: 'service.id',
       isOrderByField: false,
       format(value) {
-        return GridUtils.getDataFromObject(value,"arabicLabel");
+        return GridUtils.getDataFromObject(value, 'arabicLabel');
       },
       searchListField: (list: any) => {
         return list.id;
       },
-      searchOperation:"EQUAL",
+      searchOperation: 'EQUAL',
     },
     {
-      header: "الحالة",
+      header: 'الحالة',
       visible: true,
-      field: "status",
+      field: 'status',
       type: InputType.LIST,
       searchableField: true,
-      selectQueryName: "status.id",
+      selectQueryName: 'status.id',
       isOrderByField: false,
       format(value) {
-        return GridUtils.getDataFromObject(value,"arabicLabel");
+        return GridUtils.getDataFromObject(value, 'arabicLabel');
       },
       style: (value: any) => {
-        return { color:value.color+"" };
+        return { color: value.color + '' };
       },
       searchListField: (list: any) => {
         return list.id;
       },
-      searchOperation:"EQUAL",
+      searchOperation: 'EQUAL',
     },
     {
-      header: "متابع الحالة",
+      header: 'متابع الحالة',
       visible: true,
-      field: "assignTo",
+      field: 'assignTo',
       type: InputType.LIST,
       searchableField: true,
-      selectQueryName: "assignTo.id",
+      selectQueryName: 'assignTo.id',
       isOrderByField: false,
 
       format(value) {
-
-        return GridUtils.getDataFromObject(value,"arabicLabel");
-
+        return GridUtils.getDataFromObject(value, 'arabicLabel');
       },
 
       searchListField: (list: any) => {
         return list.id;
       },
 
-      searchOperation:"EQUAL",
+      searchOperation: 'EQUAL',
     },
     {
-      header: "مشرف الحالة",
+      header: 'مشرف الحالة',
       visible: true,
-      field: "reporter",
+      field: 'reporter',
       type: InputType.LIST,
       searchableField: true,
-      selectQueryName: "operationReporter.id",
+      selectQueryName: 'operationReporter.id',
       isOrderByField: false,
       format(value) {
-        return GridUtils.getDataFromObject(value,"arabicLabel");
+        return GridUtils.getDataFromObject(value, 'arabicLabel');
       },
       searchListField: (list: any) => {
         return list.id;
       },
-      searchOperation:"EQUAL",
+      searchOperation: 'EQUAL',
     },
     {
       header: 'ملاحظات',
@@ -221,12 +239,13 @@ export class MngPersonOperationComponent {
     },
   ];
   constructor(
-    private serviceService:ServiceService,
-    private statusService : StatusService,
-    private UserService:UserService,
-    public service : PersonOperationService,
+    private serviceService: ServiceService,
+    private statusService: StatusService,
+    private UserService: UserService,
+    public service: PersonOperationService,
     private spinner: NgxSpinnerService,
-    private toast:ToastService
+    private toast: ToastService,
+    private router: Router
   ) {
     this.fetchServiceList();
     this.fetchStatusList();
@@ -234,66 +253,85 @@ export class MngPersonOperationComponent {
   }
   onSearch(query: string) {}
 
-  onOpenAddModal(){
+  onOpenAddModal() {}
 
-  }
-
-  onOpenFastService(){
+  onOpenFastService() {
     this.spinner.show();
     this.onAddOld = false;
     this.onAddFast = true;
     this.spinner.hide();
   }
-
-  onCloseFastService(){
+  @ViewChild('appGrid') grid!: GridComponent<PersonOperationService>;
+  onCloseFastService() {
     this.onAddFast = false;
+    this.grid.loadData(undefined);
   }
 
-  onOpenOldService(person:IPerson){
-
+  onOpenOldService(person: IPerson) {
+    this.onAddFast = false;
+    this.onChangeAssign = false;
+    this.onChangeStatus = false;
     this.spinner.show();
     this.onAddFast = false;
     this.onAddOld = true;
-    this.person  = person;
+    this.person = person;
     this.spinner.hide();
   }
 
-  onCloseOldService(){
+  onCloseOldService() {
     this.onAddOld = false;
+    this.grid.loadData(undefined);
   }
 
-  onOpenChangeStatus(op:IPersonOperation){
+  onOpenChangeStatus(op: IPersonOperation) {
     this.onAddFast = false;
     this.onAddOld = false;
+    this.onChangeAssign = false;
     this.onChangeStatus = true;
     this.personOperation = op;
   }
-  onCloseChangeStatus(){
+  onCloseChangeStatus() {
+    this.onChangeAssign = false;
     this.onChangeStatus = false;
     this.personOperation = {} as IPersonOperation;
+    this.grid.loadData(undefined);
   }
-  fetchUsersList(){
+  fetchUsersList() {
     this.spinner.show();
-    this.UserService.getSelectOption().subscribe(data=>{
+    this.UserService.getSelectOption().subscribe((data) => {
       this.gridColumns[10].searchList = data.data;
       this.gridColumns[11].searchList = data.data;
-    })
+    });
     this.spinner.hide();
   }
-  fetchServiceList(){
+  fetchServiceList() {
     this.spinner.show();
-    this.serviceService.getSelectOption().subscribe(data=>{
+    this.serviceService.getSelectOption().subscribe((data) => {
       this.gridColumns[8].searchList = data.data;
-    })
+    });
     this.spinner.hide();
   }
 
-
-  fetchStatusList(){
+  fetchStatusList() {
     this.spinner.show();
-    this.statusService.getSelectOption().subscribe(data=>{
+    this.statusService.getSelectOption().subscribe((data) => {
       this.gridColumns[9].searchList = data.data;
-    })
+    });
     this.spinner.hide();
+  }
+
+  onOpenChangeAssign(operation: IPersonOperation) {
+    this.spinner.show();
+    this.onChangeAssign = true;
+    this.onAddFast = false;
+    this.onAddOld = false;
+    this.onChangeStatus = false;
+    this.spinner.hide();
+    this.personOperation = operation;
+  }
+
+  goToOperationPage(id: number) {
+    const path = 'core/operation/' + id;
+    this.router.navigateByUrl(path);
   }
 }

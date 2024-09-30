@@ -15,7 +15,7 @@
           <option >
           </option>
             <option *ngFor="let api of APIs" value="{{api.id}}">
-              {{api?.name}}--{{ api?.methodType}}
+              {{api?.arabicLabel}}--{{ api?.type}}
             </option>
         </select>
         <input *ngIf="onAddApi" type="submit" class="fadeIn fourth" (click)="addApi()"  value="إضافة">

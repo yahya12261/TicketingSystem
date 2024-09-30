@@ -146,7 +146,7 @@ export class MngPositionComponent {
       })
   }
   onOpenAccessModal(rule:IPosition){
-    console.log(rule)
+    //console.log(rule)
     this.selectedPosition = rule;
     this.accessModal = true;
   }

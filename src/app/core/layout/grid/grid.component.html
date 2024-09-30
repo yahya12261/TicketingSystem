@@ -88,9 +88,13 @@
           </ng-container>
         </td>
       </tr>
-      <div *ngIf="noData" class="no-data">لا يوجد بيانات متوفرة</div>
+
     </tbody>
   </table>
+  <div *ngIf="noData" class="no-data text-center mt-5">
+    <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+    <h4>لا يوجد بيانات متوفرة</h4>
+</div>
  </div>
   <nav aria-label="pagination Page navigation example">
     <ul class="pagination justify-content-start">
@@ -102,6 +106,9 @@
       </li>
       <li class="page-item mx-5" *ngIf="currentPage <= totalPages && currentPage > 1" (click)="goToPage(currentPage - 1)">
         <a class="page-link" tabindex="-1">السابق</a>
+      </li>
+      <li class="page-item px-5">
+        <span>  المجموع : {{ total }} </span>
       </li>
     </ul>
   </nav>

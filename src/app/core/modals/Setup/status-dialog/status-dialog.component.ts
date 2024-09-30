@@ -29,7 +29,7 @@ OnInit{
   }
   ngOnInit(): void {
     this.createForm(this.input);
-    console.log(this.isUpdate)
+    //console.log(this.isUpdate)
     if(this.isUpdate){
     }
     this.spinner.hide();
@@ -47,7 +47,7 @@ OnInit{
   }
   onChangeColorPiker(event:any){
     this.selectedColor = event.target.value;
-    console.log('Selected color:', this.selectedColor);
+    //console.log('Selected color:', this.selectedColor);
 
   }
   createForm(data?:IStatus) {

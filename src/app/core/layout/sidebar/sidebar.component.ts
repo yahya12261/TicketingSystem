@@ -49,7 +49,7 @@ export class SidebarComponent {
   }
 
   goTo(path: string) {
-    console.log(path);
+    //console.log(path);
     this.isSubmenuOpen = !this.isSubmenuOpen;
     this.router.navigateByUrl(path);
   }

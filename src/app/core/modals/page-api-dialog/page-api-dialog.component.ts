@@ -149,7 +149,7 @@ OnInit{
 
   }
   ngOnInit(): void {
-    console.log(this.rule)
+    //console.log(this.rule)
     this.path = "/getPagesApis/"+this.rule.id;
   }
   onSearch(query: string) {

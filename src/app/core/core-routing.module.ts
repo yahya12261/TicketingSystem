@@ -16,6 +16,10 @@ import { MngServiceComponent } from './components/mng-service/mng-service.compon
 import { MngStatusFlowComponent } from './components/Setup/mng-status-flow/mng-status-flow.component';
 import { MngPersonComponent } from './components/mng-person/mng-person.component';
 import { MngPersonOperationComponent } from './components/mng-person-operation/mng-person-operation.component';
+import { MngAssignersAndAssignedComponent } from './components/mng-assigners-and-assigned/mng-assigners-and-assigned.component';
+import { MngAdditionalServiceFieldListComponent } from './components/mng-additional-service-field-list/mng-additional-service-field-list.component';
+import { MngAdditionalFieldsComponent } from './components/mng-additional-fields/mng-additional-fields.component';
+import { OperationPageComponent } from './components/operation-page/operation-page.component';
 
 const routes: Routes = [
   {
@@ -35,6 +39,10 @@ const routes: Routes = [
       { path: 'setup/status', component:MngStatusComponent },
       { path: 'setup/service', component:MngServiceComponent },
       { path: 'setup/status-flow', component:MngStatusFlowComponent },
+      { path: 'setup/assigners', component:MngAssignersAndAssignedComponent },
+      { path: 'setup/additional-field-list', component:MngAdditionalServiceFieldListComponent },
+      { path: 'setup/additional-field', component:MngAdditionalFieldsComponent },
+      { path: 'operation/:id', component:OperationPageComponent },
       { path: 'person', component:MngPersonComponent },
       { path: 'person-operations', component:MngPersonOperationComponent },
       { path: '**', redirectTo: 'home' },

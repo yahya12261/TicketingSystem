@@ -37,4 +37,36 @@ export class PositionService extends BaseService<IPosition>{
     );
   }
 
+  addAssigners(data:{}): Observable<{data:IRule,message:string,success:boolean}> {
+    const headers = this.getHeaders();
+    return this.http.post<any>(this.apiUrl+"/assign-perms", data, { headers }).pipe(
+      switchMap((response) => {
+          return of({data:response.data as IRule,
+            message:response.message,
+            success:response.success
+          });
+      })
+    );
+  }
+  deleteAssigners(data: {}): Observable<{ data: IRule; message: string; success: boolean }> {
+    const headers = this.getHeaders();
+    return this.http.delete<{ data: IRule; message: string; success: boolean }>(this.apiUrl + "/assign-perms", {
+        headers,
+        body: data // Include the body here
+    }).pipe(
+        switchMap((response) => {
+            return of({
+                data: response.data,
+                message: response.message,
+                success: response.success
+            });
+        })
+    );
+}
+
+getAvailbleUsers(): Observable<{data:any, success:boolean,message:string, }> {
+  const headers = this.getHeaders();
+  return this.http.get<{ data:any, success:boolean,message:string, }>(this.apiUrl+"/getAssigners", { headers });
+}
+
 }

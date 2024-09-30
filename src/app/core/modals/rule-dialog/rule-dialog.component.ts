@@ -32,9 +32,9 @@ OnInit{
   }
   ngOnInit(): void {
     this.createForm(this.InpRule);
-    console.log(this.isUpdate)
+    //console.log(this.isUpdate)
     if(this.isUpdate){
-      console.log(this.InpRule);
+      //console.log(this.InpRule);
 
     }
     this.spinner.hide();

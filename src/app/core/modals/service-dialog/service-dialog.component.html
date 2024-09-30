@@ -17,6 +17,21 @@
             </div>
           </div>
           <div class="row">
+            <div class="col-6">
+              <app-custom-select
+              
+              [label]="'المشرف'"
+              [control]="reporterControl"
+              [required]="true"
+              [errorMessage]="'حقل إجباري'"
+              [options]="usersOptions"
+              [labelValue]="'arabicLabel'"
+              [value]="'id'"
+              [isFetchedData] = "true"
+          ></app-custom-select>
+            </div>
+          </div>
+          <div class="row">
             <div class="col-12">
               <div class="form-group">
               <label>ملاحظات</label>
@@ -29,7 +44,7 @@
     </section>
     <footer class="modal-container-footer">
       <button class="button is-ghost" (click)="onClose()" >إلغاء</button>
-      <button class="button is-primary" (click)="isUpdate=='false'?onSubmit():onUpdate()" > {{isUpdate==="true"?"تعديل":"إضافة"}} </button>
+      <button class="button is-primary" (click)="isUpdate=='false'?onSubmit():onUpdate()" [disabled]="!myForm.valid"> {{isUpdate==="true"?"تعديل":"إضافة"}} </button>
     </footer>
   </article>
 </div>

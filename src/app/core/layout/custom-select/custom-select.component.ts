@@ -23,8 +23,8 @@ import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/f
         </option>
       </select>
       <div class="invalid-feedback" *ngIf="invalid">
-        {{ control?.errors?.['required'] ? 'حقل إجباري' : errorMessage }}
-      </div>
+    {{ control.errors?.['required'] ? 'حقل إجباري' : errorMessage }}
+</div>
     </div>
   `,
   styles: [
